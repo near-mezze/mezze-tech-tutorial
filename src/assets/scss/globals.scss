@@ -1,0 +1,90 @@
+@import 'prism';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  transition: background .15s ease-in-out, color .15s ease-in-out;
+
+  &::before {
+    display: none;
+    visibility: hidden;
+    content: 'small';
+
+    @include respond-above(sm) {
+      content: 'large'
+    }
+  }
+
+  &.bright {
+    background: $backgroundBright;
+    color: $textBright;
+  }
+
+  &.dark {
+    background: $backgroundDark;
+    color: $textDark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  margin-top: 0;
+
+  @include respond-above(md) {
+    font-size: 4rem;
+  }
+}
+
+a {
+  color: $brandPrimary;
+}
+
+.markdown {
+  p {
+    @apply me-2;
+  }
+}
+
+.tip {
+  border-radius: 5px;
+  padding: .75rem;
+  color: #222;
+  border-left: 8px solid #ebe750;
+  background-color: #f9f8d0;
+}
+
+.vssue {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  max-width: 90%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 10px;
+  padding: 27px;
+  z-index: 2;
+}
+
+@media screen and (min-width: 650px) {
+  .vssue {
+    max-width: 50%;
+  }
+}
