@@ -17,7 +17,7 @@ function addStyleResource (rule) {
 const siteName = 'Mezze-Tech'
 module.exports = {
   siteName: siteName,
-  siteUrl: 'https://github.com/humnaman/near-sample-thanks-tutorial',
+  siteUrl: 'https://github.com/near-mezze/thanks-tutorial',
   titleTemplate: `${siteName} - %s`,
   plugins: [
     {
