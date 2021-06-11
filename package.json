@@ -1,5 +1,5 @@
 {
-  "name": "jamdocs",
+  "name": "thanks-tutorial",
   "private": true,
   "scripts": {
     "build": "gridsome build",
