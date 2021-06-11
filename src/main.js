@@ -3,11 +3,6 @@
 
 import DefaultLayout from '~/layouts/Default.vue'
 import '~/assets/scss/globals.scss'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { config, library } from '@fortawesome/fontawesome-svg-core'
-import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { faLightbulb, faQuoteLeft, faQuoteRight } from '@fortawesome/free-solid-svg-icons'
-import '@fortawesome/fontawesome-svg-core/styles.css'
 import Vuetify from 'vuetify'
 import "vuetify/dist/vuetify.min.css"
 import Vuex from 'vuex'
@@ -16,17 +11,10 @@ import Highlightable from '~/components/Highlightable.vue'
 import Vssue from 'vssue'
 import GithubV3 from '@vssue/api-github-v3'
 import 'vssue/dist/vssue.css'
-
-require('typeface-source-sans-pro')
-
-config.autoAddCss = false;
-library.add(faGithub, faTwitter)
+import { InfoIcon, GithubIcon } from 'vue-feather-icons'
+// require('typeface-source-sans-pro')
 
 export default function (Vue, { router, head, isClient, appOptions }) {
-
-  // Add iconography plugin
-  library.add(faLightbulb, faQuoteLeft, faQuoteRight)
-  Vue.component('fa-icon', FontAwesomeIcon)
   
   // out-of-the-box slick layouts plus material design classes
   Vue.use(Vuetify);
@@ -36,6 +24,9 @@ export default function (Vue, { router, head, isClient, appOptions }) {
 
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
+
+  Vue.component('github-icon', GithubIcon)
+  Vue.component('info-icon', InfoIcon)
 
 
   // Add contract demo
@@ -52,17 +43,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     clientId: process.env.GRIDSOME_VSSUE_CLIENT_ID,
     clientSecret: process.env.GRIDSOME_VSSUE_CLIENT_SECRET
   })
-
-  // // allows users to comment via GH issues on any text they select
-  // Vue.use(VueNear, {
-  //   // Needs the environment for the correct RPC to use
-  //   env: 'development',
-  //   config: {
-  //     appTitle: 'Thanks',
-  //     contractName: 'thanks.humanman.testnet',
-  //   },
-  // })
-
 
   // Add attributes to HTML tag
   head.htmlAttrs = { lang: 'en' }

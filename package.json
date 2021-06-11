@@ -1,5 +1,5 @@
 {
-  "name": "sample-thanks-tutorial",
+  "name": "jamdocs",
   "private": true,
   "scripts": {
     "build": "gridsome build",
@@ -7,40 +7,31 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.3",
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-brands-svg-icons": "^5.15.3",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/vue-fontawesome": "^2.0.2",
     "@gridsome/plugin-google-analytics": "^0.1.0",
     "@gridsome/plugin-sitemap": "^0.2.1",
     "@gridsome/remark-prismjs": "0.0.6",
     "@gridsome/source-filesystem": "^0.6.0",
-    "@gridsome/transformer-remark": "^0.6.4",
+    "@gridsome/transformer-remark": "^0.3.4",
     "@gridsome/vue-remark": "^0.2.6",
     "@vssue/api-github-v3": "^1.4.7",
     "graphql-playground-html": "^1.6.22",
     "gridsome": "^0.7.0",
     "gridsome-plugin-algolia": "^2.1.1",
-    "gridsome-plugin-remark-prismjs-all": "^0.4.8",
     "kind-of": "^6.0.3",
     "minimist": "^1.2.3",
-    "near-api-js": "^0.41.0",
     "serialize-javascript": "^3.1.0",
     "typeface-source-sans-pro": "^0.0.54",
     "vssue": "^1.4.8",
     "vue-feather-icons": "^4.22.0",
-    "vue-near": "^0.2.1",
+    "vue-svg-loader": "^0.16.0",
     "vuetify": "^2.5.3",
     "vuex": "^3.1.1",
-    "vue": "^2.0.8",
-    "vue-template-compiler": "^2.1.8",
+    "webpack-node-externals": "^3.0.0",
     "websocket-extensions": "^0.1.4"
   },
   "devDependencies": {
     "node-sass": "^4.13.1",
     "sass-loader": "^7.1.0",
-    "style-resources-loader": "^1.2.1",
-    "webpack-node-externals": "^3.0.0"
+    "style-resources-loader": "^1.2.1"
   }
 }

@@ -7,12 +7,12 @@
 const nodeExternals = require('webpack-node-externals')
 
 module.exports = function (api) {
-  
+
   api.chainWebpack((config, { isServer }) => {
     if (isServer) {
       config.externals([
         nodeExternals({
-          allowlist: [/^vuetify/]
+          allowlist: [/^vuetify/, /^vssue/, /^@vssue/]
         })
       ])
     }
@@ -23,13 +23,13 @@ module.exports = function (api) {
 
     const data = require('./data/settings.json');
 
-    const Menu = store.addCollection({typeName: 'Menu'})
+    const Menu = store.addCollection({ typeName: 'Menu' })
 
-    for(const item of data.sidebar){
-    	Menu.addNode({
+    for (const item of data.sidebar) {
+      Menu.addNode({
         section: item.section,
         topics: item.topics
-	    })
+      })
     }
   })
 

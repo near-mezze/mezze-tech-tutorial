@@ -56,6 +56,15 @@ a {
   color: $brandPrimary;
 }
 
+.left-quote {
+  font-size: 4rem;
+  display: inline-block;
+  margin-bottom: -2.5rem;
+  vertical-align: bottom;
+  opacity: .7;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 .markdown {
   p {
     @apply me-2;
@@ -89,3 +98,4 @@ a {
     max-width: 50%;
   }
 }
+

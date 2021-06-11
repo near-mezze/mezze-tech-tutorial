@@ -42,7 +42,6 @@ export default {
     onHighlight(text) {
       this.showComment = true
       this.selected = text
-      // console.log('highlight:', text)
     },
     onDismiss() {
       this.showComment = false

@@ -5,7 +5,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 const path = require('path')
 
-function addStyleResource (rule) {
+function addStyleResource(rule) {
   rule.use('style-resource')
     .loader('style-resources-loader')
     .options({
@@ -19,6 +19,14 @@ module.exports = {
   siteName: siteName,
   siteUrl: 'https://github.com/near-mezze/thanks-tutorial',
   titleTemplate: `${siteName} - %s`,
+  chainWebpack(config) {
+    config.mode('development')
+    const svgRule = config.module.rule('svg')
+    svgRule.uses.clear()
+    svgRule
+      .use('vue-svg-loader')
+      .loader('vue-svg-loader')
+  },
   plugins: [
     {
       use: '@gridsome/vue-remark',
@@ -42,7 +50,34 @@ module.exports = {
       options: {
         cacheTime: 600000
       }
-    }
+    },
+    // {
+    //   use: 'gridsome-plugin-svg',
+    //   options: {
+    //     // default options below
+    //     goesBothWays: false,
+    //     svgo: [
+    //       {
+    //         removeTitle: false
+    //       },
+    //       {
+    //         prefixIds: {
+    //           prefix: (_, { path }) => basename(path, '.svg'),
+    //           delim: '-',
+    //         },
+    //       },
+    //       {
+    //         removeDesc: false
+    //       },
+    //       {
+    //         removeViewBox: false,
+    //       },
+    //       {
+    //         sortAttrs: true,
+    //       }
+    //     ],
+    //   }
+    // }
   ],
   chainWebpack: config => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']

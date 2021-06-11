@@ -104,7 +104,7 @@ $ cd project-name
 # run scripts in package.json with "yarn <script name>" or "npm run <script name>"
 ```
 
->  <div class="tip"> <fa-icon class="mr-2" style="opacity: .7;" icon="lightbulb" size="sm"></fa-icon>If you're like me, and need a visual for what this Contract might look like with a UI, scroll down to the <a href="#what-next">What Next?</a> section to see a demo of Thanks with a simple UI layer. Code is in the repo of this tutorial in the 
+>  <div class="tip"> <info-icon size="1.5x" class="custom-class mr-2 pt-1"></info-icon>If you're like me, and need a visual for what this Contract might look like with a UI, scroll down to the <a href="#what-next">What Next?</a> section to see a demo of Thanks with a simple UI layer. Code is in the repo of this tutorial in the 
 > <span class="code-emphasis inline-block">contract-ui/</span> directory.
 > </div>
 <br/>
@@ -384,7 +384,7 @@ The account for the contract above is `dev-1622755101091-2932922`. It's a bit co
 
 <blockquote class="tip mb-4">
 
-  <fa-icon class="mr-2" style="opacity: .7;" icon="lightbulb" size="sm"></fa-icon><strong>Do you have a testnet account yet?</strong>
+  <info-icon size="1. mr-45x" class="custom-class pt-2"></info-icon><strong>Do you have a testnet account yet?</strong>
 
   <hr/>
 
@@ -647,7 +647,7 @@ Unit Tests use many of the modules provided by `near-sdk-as` package, including 
 You can see it in use in the code above. You don't always need to use _VMContext_ , but if you have checks, like _Thanks_ does, on your functions, which check the owner of the contract, then _VMContext_ will be a real help. It has a bunch of methods allowing you to get the most out of your tests. <a href="https://github.com/near/near-sdk-as/blob/master/near-mock-vm/assembly/context.ts" target="_blank">Learn more about <em>VMContext</em></a>.
 
 <blockquote class="tip">
-<fa-icon class="mr-2" style="opacity: .7;" icon="lightbulb" size="sm"></fa-icon><strong>Troubleshooting Bash Errors</strong><br/>
+<info-icon size="1 mr-4.5x" class="custom-class pt-2"></info-icon><strong>Troubleshooting Bash Errors</strong><br/>
 <hr/> 
 
 You run into some weird issues in the terminal when running tests. Make sure you haven't added any unnecessary dependencies. 

@@ -9,7 +9,7 @@ slug: getting-started
 
 _From near.org_:
 <blockquote class="mb-4">
-  <fa-icon class="mr-2" icon="quote-left" size="sm"></fa-icon><em>So what is NEAR (aka “the NEAR Platform”)? NEAR is a decentralized development platform built on top of the NEAR Protocol, which is a public, sharded, developer-friendly, proof-of-stake blockchain. Put another way, NEAR is like a public community-run cloud platform.  That means it is a highly scalable, low cost platform for developers to create decentralized apps on top of. While it’s built on top of the NEAR Protocol blockchain, the NEAR Platform also contains a wide range of tooling from explorers to CLI tools to wallet apps to interoperability components which help developers build much more easily and the ecosystem to scale more widely.</em>
+  <span class="left-quote">&ldquo;</span><em>So what is NEAR (aka “the NEAR Platform”)? NEAR is a decentralized development platform built on top of the NEAR Protocol, which is a public, sharded, developer-friendly, proof-of-stake blockchain. Put another way, NEAR is like a public community-run cloud platform.  That means it is a highly scalable, low cost platform for developers to create decentralized apps on top of. While it’s built on top of the NEAR Protocol blockchain, the NEAR Platform also contains a wide range of tooling from explorers to CLI tools to wallet apps to interoperability components which help developers build much more easily and the ecosystem to scale more widely.</em>
   <br/>
   <br/>
   <em>Whereas most other “scalable” blockchains use approaches that centralize processing on high-end hardware to provide a temporary boost in throughput, NEAR Protocol’s approach allows the platform’s capacity to scale nearly linearly up to billions of transactions in a fully decentralized way.</em>
@@ -29,7 +29,7 @@ View Functions simply read the data. You may have a method that returns a list o
 
 If you are familiar with the terms "setter" and "getter", or http GET and POST requests, or read/write access, you may assume that view/call functions share this same relationship. It's important to be aware what your functions are doing so you can use the correct syntax when writing and calling them.
 
-<blockquote class="tip"><fa-icon class="mr-2" style="opacity: .7;" icon="lightbulb" size="sm"></fa-icon>When in doubt of whether your contract method is
+<blockquote class="tip"><info-icon size="1.5x" class="custom-class mr-2 pt-1"></info-icon>When in doubt of whether your contract method is
 a call or view function, check if gas is used when 
 you call it. View functions are free, while call 
 functions cost gas. <a target="_blank" href="https://docs.near.org/docs/concepts/gas">Learn more about NEAR gas fees</a>.</blockquote> 
@@ -59,7 +59,7 @@ Your IDE may freak out at some of the syntax so make sure you have all the plugi
 
 
 <blockquote class="tip" style="margin-top: 1rem;">
-  <fa-icon class="mr-2" style="opacity: .7;" icon="lightbulb" size="sm"></fa-icon><strong>When you're ready to switch over from a dev contract account to a permanent one, here's how:</strong><br/>
+  <info-icon size="1.5x" class="custom-class mr-2 pt-1"></info-icon><strong>When you're ready to switch over from a dev contract account to a permanent one, here's how:</strong><br/>
   <hr/>
   <br/><strong>Step 1: Create an account for the contract</strong><br/>
   Visit <a href="https://wallet.nearprotocol.com" target="_blank">NEAR Wallet</a> and make a new account. You'll be deploying these smart contracts to this new account.

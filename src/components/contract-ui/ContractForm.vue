@@ -100,7 +100,8 @@
       }
     },
     created() {
-      window.nearInitPromise = initContract()
+      if(process.isClient) {
+        window.nearInitPromise = initContract()
         .then(({ contract, currentUser, nearConfig, walletConnection }) => {
           this.near.contract = contract
           this.near.currentUser = currentUser
@@ -108,7 +109,8 @@
           this.near.wallet = walletConnection
           this.contractName = this.near.config.contractName
           // this.senderName = this.near.currentUser.accountId
-      })
+        })
+      }
     },
     methods: {
       nearLogin() {
