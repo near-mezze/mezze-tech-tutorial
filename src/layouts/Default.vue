@@ -13,8 +13,10 @@
       </main>
     </div>
     <BaseTint v-if="showComment" @close="onDismiss">
-      <Vssue :title="selected" class="vssue"/>
+      <!-- <Disqus shortname="near-mezze" :identifier="selected" /> -->
+      <CommentForm />
     </BaseTint>
+
   </v-app>
 </template>
 
@@ -30,6 +32,7 @@ query {
 import Header from '~/components/Header.vue'
 import Sidebar from '~/components/Sidebar.vue'
 import BaseTint from '~/components/BaseTint.vue'
+import CommentForm from '~/components/CommentForm.vue'
 
 export default {
   data() {
@@ -50,7 +53,8 @@ export default {
   components: {
     Header,
     Sidebar,
-    BaseTint
+    BaseTint,
+    CommentForm
   },
   props: {
     sidebar: {
@@ -100,6 +104,27 @@ export default {
 
   &--sidebar-is-open {
     transform: translate(300px);
+  }
+}
+
+#disqus_thread {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  max-width: 90%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 10px;
+  padding: 27px;
+  z-index: 2;
+  background: #333;
+}
+
+@media screen and (min-width: 650px) {
+  #disqus_thread {
+    min-width: 550px;
+    max-width: 50%;
   }
 }
 

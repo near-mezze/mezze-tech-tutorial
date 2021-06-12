@@ -79,23 +79,4 @@ a {
   background-color: #f9f8d0;
 }
 
-.vssue {
-  position: absolute;
-  top: 50vh;
-  left: 50vw;
-  max-width: 90%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  border-radius: 10px;
-  padding: 27px;
-  z-index: 2;
-}
-
-@media screen and (min-width: 650px) {
-  .vssue {
-    min-width: 550px;
-    max-width: 50%;
-  }
-}
 

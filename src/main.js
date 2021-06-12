@@ -8,41 +8,47 @@ import "vuetify/dist/vuetify.min.css"
 import Vuex from 'vuex'
 import ContractForm from '~/components/contract-ui/ContractForm.vue'
 import Highlightable from '~/components/Highlightable.vue'
-import Vssue from 'vssue'
-import GithubV3 from '@vssue/api-github-v3'
+// import Vssue from 'vssue'
+// import GithubV3 from '@vssue/api-github-v3'
 import 'vssue/dist/vssue.css'
 import { InfoIcon, GithubIcon } from 'vue-feather-icons'
-// require('typeface-source-sans-pro')
+// import VueDisqus from 'vue-disqus'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 
 export default function (Vue, { router, head, isClient, appOptions }) {
+  // for GH comments
+  Vue.use(VueAxios, axios)
   
   // out-of-the-box slick layouts plus material design classes
   Vue.use(Vuetify);
-
+  
   // not actually sure if needed
   Vue.use(Vuex)
-
+  
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
-
+  
   Vue.component('github-icon', GithubIcon)
   Vue.component('info-icon', InfoIcon)
-
-
+  
+  
   // Add contract demo
   Vue.component('contract-form', ContractForm)
   
   // Add Medium Style Select Text to Comment Functionality
   Vue.component('highlightable', Highlightable)
-
+  
   // allows users to comment via GH issues on any text they select
-  Vue.use(Vssue, {
-    api: GithubV3,
-    owner: process.env.GRIDSOME_REPO_OWNER,
-    repo: process.env.GRIDSOME_REPO_NAME,
-    clientId: process.env.GRIDSOME_VSSUE_CLIENT_ID,
-    clientSecret: process.env.GRIDSOME_VSSUE_CLIENT_SECRET
-  })
+  // Vue.use(VueDisqus)
+  // Vue.use(Vssue, {
+  //   api: GithubV3,
+  //   owner: process.env.GRIDSOME_REPO_OWNER,
+  //   repo: process.env.GRIDSOME_REPO_NAME,
+  //   clientId: process.env.GRIDSOME_VSSUE_CLIENT_ID,
+  //   clientSecret: process.env.GRIDSOME_VSSUE_CLIENT_SECRET
+  // })
 
   // Add attributes to HTML tag
   head.htmlAttrs = { lang: 'en' }
@@ -82,13 +88,20 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     src: "https://cdn.jsdelivr.net/gh/nearprotocol/near-api-js/dist/near-api-js.js"
   })
   
+ 
+  // Disqus API 
+  head.script.push({
+    src: "https://near-mezze.disqus.com/embed.js"
+  })
+  
   //UI
   appOptions.vuetify = new Vuetify({});
   
   // State
   appOptions.store = new Vuex.Store({
     state: {
-      sidebarOpen: false
+      sidebarOpen: false,
+      userName: ''
     },
     mutations: {
       toggleSidebar(state) {
@@ -99,6 +112,9 @@ export default function (Vue, { router, head, isClient, appOptions }) {
       },
       openSidebar(state) {
         state.sidebarOpen = true
+      },
+      setUserName(state, val) {
+        state.userName = val
       }
     }
   })

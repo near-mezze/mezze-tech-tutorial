@@ -1,6 +1,6 @@
 <template>
   <div class="tint" @click.self="close">
-    <slot />
+    <slot @posted="close"/>
   </div>
 </template>
 
