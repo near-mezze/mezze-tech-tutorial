@@ -4,18 +4,18 @@
       <Header :menuToggle="sidebar" />
       <Sidebar v-if="sidebar" />
       <main class="main" :class="{'main--no-sidebar': !sidebar, 'main--sidebar-is-open' : this.$store.state.sidebarOpen}">
-        <highlightable
+        <!-- <highlightable
           @highlight="onHighlight"
           @dismiss="onDismiss"
-        >
+        > -->
           <slot/>
-        </highlightable>
+        <!-- </highlightable> -->
+        <Disqus shortname="near-mezze" :identifier="selected" />
       </main>
     </div>
-    <BaseTint v-if="showComment" @close="onDismiss">
-      <!-- <Disqus shortname="near-mezze" :identifier="selected" /> -->
+    <!-- <BaseTint v-if="showComment" @close="onDismiss">
       <CommentForm />
-    </BaseTint>
+    </BaseTint> -->
 
   </v-app>
 </template>
@@ -108,12 +108,13 @@ export default {
 }
 
 #disqus_thread {
-  position: absolute;
-  top: 50vh;
-  left: 50vw;
+  // position: absolute;
+  // top: 50vh;
+  // left: 50vw;
+  margin: auto;
   max-width: 90%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  // margin-right: -50%;
+  // transform: translate(-50%, -50%);
   background: #fff;
   border-radius: 10px;
   padding: 27px;

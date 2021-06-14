@@ -12,14 +12,14 @@ import Highlightable from '~/components/Highlightable.vue'
 // import GithubV3 from '@vssue/api-github-v3'
 import 'vssue/dist/vssue.css'
 import { InfoIcon, GithubIcon } from 'vue-feather-icons'
-// import VueDisqus from 'vue-disqus'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import VueDisqus from 'vue-disqus'
+// import axios from 'axios'
+// import VueAxios from 'vue-axios'
 
 
 export default function (Vue, { router, head, isClient, appOptions }) {
   // for GH comments
-  Vue.use(VueAxios, axios)
+  // Vue.use(VueAxios, axios)
   
   // out-of-the-box slick layouts plus material design classes
   Vue.use(Vuetify);
@@ -41,7 +41,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.component('highlightable', Highlightable)
   
   // allows users to comment via GH issues on any text they select
-  // Vue.use(VueDisqus)
+  Vue.use(VueDisqus)
   // Vue.use(Vssue, {
   //   api: GithubV3,
   //   owner: process.env.GRIDSOME_REPO_OWNER,
