@@ -11,7 +11,7 @@ import Highlightable from '~/components/Highlightable.vue'
 // import Vssue from 'vssue'
 // import GithubV3 from '@vssue/api-github-v3'
 import 'vssue/dist/vssue.css'
-import { InfoIcon, GithubIcon } from 'vue-feather-icons'
+import {GithubIcon, HelpCircleIcon} from 'vue-feather-icons'
 import VueDisqus from 'vue-disqus'
 // import axios from 'axios'
 // import VueAxios from 'vue-axios'
@@ -31,7 +31,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.component('Layout', DefaultLayout)
   
   Vue.component('github-icon', GithubIcon)
-  Vue.component('info-icon', InfoIcon)
+  Vue.component('info-icon', HelpCircleIcon)
   
   
   // Add contract demo

@@ -4,7 +4,7 @@
       <h1>{{ this.description }}</h1>
       <nav>
         <!-- To use other icons here, you need to import them in the Shortcut component -->
-        <Shortcut link="/getting-started" text="Getting Started with NEAR" icon="sliders-icon" />
+        <Shortcut link="/getting-started" text="Getting Started with NEAR" icon="near-logo" />
       </nav>
       <GitLink class="git" size="large" />
     </div>
