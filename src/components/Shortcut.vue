@@ -65,6 +65,15 @@ a {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  .bright & {
+    color: $textBright;
+  }
+
+  .dark & {
+    color: $textDark;
+  }
+
 }
 
 svg {
@@ -75,6 +84,14 @@ svg {
   @include respond-above(md) {
     width: 3em;
     height: 3em;
+  }
+
+  .bright & {
+    fill: $textBright;
+  }
+
+  .dark & {
+    fill: $textDark;
   }
 }
 </style>
