@@ -36,7 +36,7 @@ module.exports = {
         typeName: 'Tutorial',
         template: './src/templates/Tutorial.vue',
         includePaths: ['~/src/components'],
-        plugins: ['@gridsome/remark-prismjs'],
+        plugins: ['gridsome-plugin-remark-prismjs-all'],
       }
     },
     {
@@ -50,34 +50,7 @@ module.exports = {
       options: {
         cacheTime: 600000
       }
-    },
-    // {
-    //   use: 'gridsome-plugin-svg',
-    //   options: {
-    //     // default options below
-    //     goesBothWays: false,
-    //     svgo: [
-    //       {
-    //         removeTitle: false
-    //       },
-    //       {
-    //         prefixIds: {
-    //           prefix: (_, { path }) => basename(path, '.svg'),
-    //           delim: '-',
-    //         },
-    //       },
-    //       {
-    //         removeDesc: false
-    //       },
-    //       {
-    //         removeViewBox: false,
-    //       },
-    //       {
-    //         sortAttrs: true,
-    //       }
-    //     ],
-    //   }
-    // }
+    }
   ],
   chainWebpack: config => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']

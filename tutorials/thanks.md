@@ -68,7 +68,6 @@ By the end of this tutorial, you will have a deeper understanding of how NEAR sm
 
 ## Local Setup
 
-
 There is a repo of this project with several branches. The first branch, `getting-started`, is the bare bones project. It will have all of the files we need, but most of them will be empty. The others you will find are:
 
 1. `getting-started`
@@ -99,7 +98,7 @@ Otherwise, let's get started!
 Clone the repository below or run this command:
 
 ```bash
-$ git clone git clone git@github.com:humanman/sample--thanks.git project-name
+$ git clone git clone git@github.com:near-mezze/sample--thanks.git project-name
 $ cd project-name
 # run scripts in package.json with "yarn <script name>" or "npm run <script name>"
 ```
@@ -156,7 +155,6 @@ That's pretty much it for a bird's eye view. Many of the files you see in the tr
 
 Open your `src/assembly/index.ts` file, and paste the following at the top of the page:
 
-
 ```typescript
 // assembly/index.ts
 import { Context, ContractPromiseBatch, logging, u128, PersistentVector } from "near-sdk-core"
@@ -175,7 +173,11 @@ Let's review what we are importing from `near-sdk-core`:
 
 Next, let's add some constants and type declarations to `index.ts`:
 
-
+<v-row justify="center" class="mb-4">
+<v-expansion-panels accordion>
+<v-expansion-panel>
+<v-expansion-panel-header><code>index.ts (continued)</code></v-expansion-panel-header>
+<v-expansion-panel-content>
 
 ```typescript
 /**
@@ -292,6 +294,11 @@ export class Vector<T> extends PersistentVector<T> {
 }
 ```
 
+</v-expansion-panel-content>
+</v-expansion-panel>
+</v-expansion-panels>
+</v-row>
+
 Hopefully, the comments in the code above will give you some clues as to what each variable and type does. Basically, we are declaring that `AccountId` will always be a string. `Gas` will be type _u64_. `Amount` will be type _u128_, and so on. 
 
 As for our constants, we mostly define budgetary restrictions, e.g,`CONTRIBUTION_SAFETY_LIMIT` sets the max value accepted to 5 NEAR.
@@ -300,6 +307,11 @@ You'll also notice several classes defined: `ContributionTracker`, `Message`, an
 
 Let's put this code to work. Paste the following code into `index.ts`:
 
+<v-row justify="center" class="mb-4">
+<v-expansion-panels accordion>
+<v-expansion-panel>
+<v-expansion-panel-header><code>index.ts (continued)</code></v-expansion-panel-header>
+<v-expansion-panel-content>
 
 ```typescript
 // assembly/index.ts
@@ -331,6 +343,11 @@ export function say(message: string, anonymous: bool = false): bool {
 }
 ```
 
+</v-expansion-panel-content>
+</v-expansion-panel>
+</v-expansion-panels>
+</v-row>
+
 Ok! So we have a helper function, `_assert_financial_safety_limits`(love the name!), and immediately use it in our main contract function, `say`. Can you guess whether `say` is a _view_ or _call_ functions? 
 
 Starting with the arguments, it looks like we are expecting a `message` (makes sense), and a boolean value for `anonymous`, which defaults to `false`. Cool, so this method allows you to `say` something anonymously if you want. This is most likely a _call_ function since _view_ functions don't typically require a string argument, but let's dive deeper to make sure.
@@ -339,7 +356,7 @@ Let's look at some of the property methods in there. `Context` is being used, an
 
 Next, we see property methods like `update` and `pushBack`. With `update`, we definitely know we are mutating state somehow, which means it's a _call_ function. The same goes with `pushBack`, which is a method on `Vector`, which in turn extends the class, `PersistentVector`, a _storage_ collection you will often find being used in NEAR contracts to persist data. You can read all about data storage collections in the [NEAR docs](https://docs.near.org/docs/concepts/data-storage).
 
-## Calling Function
+## Calling Functions
 
 Notice we are exporting `say`. If we don't export our contract functions then NEAR will throw a `MethodNotFound` error when we try to call them. 
 
@@ -472,6 +489,12 @@ Our smart contracts are singleton and ready to mingleton!
 
 Let's take a closer look at the refactored code:
 
+<v-row justify="center" class="mb-4">
+<v-expansion-panels accordion>
+<v-expansion-panel>
+<v-expansion-panel-header><code>index.ts</code></v-expansion-panel-header>
+<v-expansion-panel-content>
+
 ```typescript
 // index.ts
   //...
@@ -511,6 +534,11 @@ export class Contract {
 
   //...
 ```
+</v-expansion-panel-content>
+</v-expansion-panel>
+</v-expansion-panels>
+</v-row>
+
 This is the first section of our `Contract` class. Our main call function, `say`, is now housed in the `Contract` class, and has its `@mutateState` decorator signifying what type of function it is.
 
 The constructor method on `Contract` takes two arguments: `owner` and `allow_anonymous`. 
@@ -532,6 +560,12 @@ I love `assert`. It's so intuitive, and simply allows you to place guards with e
 Speaking of unit tests, let's write a few, and I encourage you to write some more of your own. Use the `assert` methods as clues for what to write.
 
 Navigate to `thanks/__tests__/index.unit.spec.ts` and paste the following in there:
+
+<v-row justify="center" class="mb-4">
+<v-expansion-panels accordion>
+<v-expansion-panel>
+<v-expansion-panel-header><code>thanks/__tests__/index.unit.spec.ts</code></v-expansion-panel-header>
+<v-expansion-panel-content>
 
 ```typescript
 import { Context} from "near-sdk-core"
@@ -589,6 +623,10 @@ describe('List Messages', () => {
 });
  
 ```
+</v-expansion-panel-content>
+</v-expansion-panel>
+</v-expansion-panels>
+</v-row>
 
 These are really simple tests that are solely informed by various `assert` methods. 
 

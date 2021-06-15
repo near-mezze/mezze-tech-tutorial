@@ -70,7 +70,7 @@
         }
         fields.fields = {
           name: this.userName,
-          message: this.message
+          message: this.comment
         }
         this.$refs.form.validate()
         const isValid = this.$refs.form.validate()

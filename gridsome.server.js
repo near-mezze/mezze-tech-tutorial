@@ -12,7 +12,7 @@ module.exports = function (api) {
     if (isServer) {
       config.externals([
         nodeExternals({
-          allowlist: [/^vuetify/, /^vssue/, /^@vssue/]
+          allowlist: [/^vuetify/, /^vssue/, /^@vssue/, /\.css$/]
         })
       ])
     }

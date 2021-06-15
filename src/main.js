@@ -6,13 +6,19 @@ import '~/assets/scss/globals.scss'
 import Vuetify from 'vuetify'
 import "vuetify/dist/vuetify.min.css"
 import Vuex from 'vuex'
+
 import ContractForm from '~/components/contract-ui/ContractForm.vue'
 import Highlightable from '~/components/Highlightable.vue'
+
 // import Vssue from 'vssue'
 // import GithubV3 from '@vssue/api-github-v3'
-import 'vssue/dist/vssue.css'
+// import 'vssue/dist/vssue.css'
 import {GithubIcon, HelpCircleIcon} from 'vue-feather-icons'
 import VueDisqus from 'vue-disqus'
+
+require("prismjs/plugins/line-numbers/prism-line-numbers.css")
+require("prismjs/plugins/command-line/prism-command-line.css")
+
 // import axios from 'axios'
 // import VueAxios from 'vue-axios'
 
