@@ -66,7 +66,7 @@
 
 
 <script>
-  import initContract from './near-connect.js'
+  import initContract from './near-thanks-connect.js'
 
   export default {
     data: () => ({

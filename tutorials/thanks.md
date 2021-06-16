@@ -4,7 +4,7 @@ slug: thanks
 ---
 
 <blockquote class="lesson mt-6">
-  <strong>Build the Thanks Smart Contract</span></strong><br><br>
+  <h3>Build the Thanks Smart Contract</span></h3><br><br>
 
   - time to complete: **80 mins**
   - level of difficulty: **moderate**
@@ -155,7 +155,7 @@ That's pretty much it for a bird's eye view. Many of the files you see in the tr
 
 Open your `src/assembly/index.ts` file, and paste the following at the top of the page:
 
-```typescript
+```typescript{numberLines:true}
 // assembly/index.ts
 import { Context, ContractPromiseBatch, logging, u128, PersistentVector } from "near-sdk-core"
 ```
@@ -179,7 +179,7 @@ Next, let's add some constants and type declarations to `index.ts`:
 <v-expansion-panel-header><code>index.ts (continued)</code></v-expansion-panel-header>
 <v-expansion-panel-content>
 
-```typescript
+```typescript{numberLines:3}
 /**
  * == TYPES ====================================================================
  */
@@ -313,7 +313,7 @@ Let's put this code to work. Paste the following code into `index.ts`:
 <v-expansion-panel-header><code>index.ts (continued)</code></v-expansion-panel-header>
 <v-expansion-panel-content>
 
-```typescript
+```typescript{numberLines:115}
 // assembly/index.ts
 function _assert_financial_safety_limits(deposit: u128): void {
   const new_total = u128.add(deposit, this.contributions.received)
@@ -401,7 +401,7 @@ The account for the contract above is `dev-1622755101091-2932922`. It's a bit co
 
 <blockquote class="tip mb-4">
 
-  <info-icon size="1. mr-45x" class="custom-class pt-2"></info-icon><strong>Do you have a testnet account yet?</strong>
+  <h3><info-icon size="1. mr-45x" class="custom-class pt-2"></info-icon>Do you have a testnet account yet?</h3><br/>
 
   <hr/>
 
@@ -435,7 +435,7 @@ The next thing we want to do is add the rest of our methods. We have a `list` me
 
 That's where _Context_ comes to play. Paste the following method in `index.ts`:
 
-```typescript
+```typescript{numberLines: 142}
   export function list(): Array<Message> {
     _assert_owner()
     return messages.get_last(10)
@@ -685,10 +685,10 @@ Unit Tests use many of the modules provided by `near-sdk-as` package, including 
 You can see it in use in the code above. You don't always need to use _VMContext_ , but if you have checks, like _Thanks_ does, on your functions, which check the owner of the contract, then _VMContext_ will be a real help. It has a bunch of methods allowing you to get the most out of your tests. <a href="https://github.com/near/near-sdk-as/blob/master/near-mock-vm/assembly/context.ts" target="_blank">Learn more about <em>VMContext</em></a>.
 
 <blockquote class="tip">
-<info-icon size="1 mr-4.5x" class="custom-class pt-2"></info-icon><strong>Troubleshooting Bash Errors</strong><br/>
+<h3><info-icon size="1 mr-4.5x" class="custom-class pt-2"></info-icon>Troubleshooting Bash Errors</h3><br/>
 <hr/> 
 
-You run into some weird issues in the terminal when running tests. Make sure you haven't added any unnecessary dependencies. 
+You run into some weird issues in the terminal when running tests. Make sure you haven't added any unnecessary dependencies. [Learn more about writing Unit Tests in _AssemblyScript_](https://dev.to/jtenner/testing-with-assemblyscript-and-the-usefulness-of-value-3egn).
 
 Also, you may have been tempted to run `npm audit fix` at some point during installation. Despite all the bright, red, urgent warnings your terminal may have thrown at you, "fixing" the dependencies may prevent you from properly compiling your code, which will in turn prevent pretty much anything else you want to do with your program. 
 
@@ -728,11 +728,11 @@ You also have some new packages installed globally that you can use like NEAR CL
 
 ## What Next?
 
-<strong class="mt-8 mb-4 d-block">Simulation Testing</strong>
+<h3 class="mt-10 mb-4">Simulation Testing</h3>
 
 If you want to dive deeper into testing, head over to the [Near Docs](https://docs.near.org/docs/develop/contracts/rust/testing-rust-contracts#simulation-tests), and look into Simulation Tests. Although, we wrote our contract code in _AssemblyScript_, all Simulation Tests are written in _Rust_, which can be a very challenging language to learn, but well worth it if you continue developing Smart Contracts. 
 
-<strong class="mt-8 mb-4 d-block">Adding a Front End</strong>
+<h3 class="mt-10 mb-4">Adding a Front End</h3>
 
 We've built and tested a remarkable backend. If we were building an API, the Smart Contracts methods would be how we make requests to our api. 
 
@@ -748,7 +748,7 @@ Take a moment to think about what this contract would look like. What would _any
 
 Before using the form below, please make sure you have a _testnet_ account. You will be redirected to NEAR explorer for authorization.
 
-<contract-form></contract-form>
+<thanks-form></thanks-form>
 
 Refer to the `contract-ui/` folder in this repo to see the code for the above form. See if you can transplant it into your local copy of `sample--thanks` using Vue.
 

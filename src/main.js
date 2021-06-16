@@ -7,7 +7,7 @@ import Vuetify from 'vuetify'
 import "vuetify/dist/vuetify.min.css"
 import Vuex from 'vuex'
 
-import ContractForm from '~/components/contract-ui/ContractForm.vue'
+import ThanksForm from '~/components/contract-ui/thanks/ThanksForm.vue'
 import Highlightable from '~/components/Highlightable.vue'
 
 // import Vssue from 'vssue'
@@ -41,7 +41,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   
   
   // Add contract demo
-  Vue.component('contract-form', ContractForm)
+  Vue.component('thanks-form', ThanksForm)
   
   // Add Medium Style Select Text to Comment Functionality
   Vue.component('highlightable', Highlightable)
