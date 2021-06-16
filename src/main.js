@@ -8,6 +8,7 @@ import "vuetify/dist/vuetify.min.css"
 import Vuex from 'vuex'
 
 import ThanksForm from '~/components/contract-ui/thanks/ThanksForm.vue'
+import LotteryForm from '~/components/contract-ui/lottery/LotteryForm.vue'
 import Highlightable from '~/components/Highlightable.vue'
 
 // import Vssue from 'vssue'
@@ -42,6 +43,7 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   
   // Add contract demo
   Vue.component('thanks-form', ThanksForm)
+  Vue.component('lottery-form', LotteryForm)
   
   // Add Medium Style Select Text to Comment Functionality
   Vue.component('highlightable', Highlightable)

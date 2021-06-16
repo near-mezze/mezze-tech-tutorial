@@ -920,8 +920,9 @@ You have built a really simple (once you get to know it) Smart Contract that off
 
 Definitely take some time to further explore the [Adding Scripts](#adding-scripts) section some more. Blockchain is not an easy concept to grasp, but tools like `near-account-utils` surface some of the inner workings for us. 
 
+<lottery-form></lottery-form>
+
 Time to delve into UI territory if you're feeling frisky. You can find the code for the _Lottery_ UI in the `components/conracts-ui/` folder.
 
-
-
+[Learn more about NEAR on the Front End](https://docs.near.org/docs/tutorials/front-end/naj-examples). 
 
