@@ -1,5 +1,5 @@
 <template>
-  <a href="https://github.com/near-mezze/thanks-tutorial" :class="size" title="Git-repository" aria-label="Thanks Tutorial on Github">
+  <a href="https://github.com/near-mezze/mezze-tech-tutorial" :class="size" title="Git-repository" aria-label="NEAR Tutorial on Github">
     <github-icon class="icon" />
     {{text}}
   </a>

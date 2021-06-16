@@ -5,7 +5,7 @@
       <Sidebar v-if="sidebar" />
       <main class="main" :class="{'main--no-sidebar': !sidebar, 'main--sidebar-is-open' : this.$store.state.sidebarOpen}">
         <slot/>
-        <Disqus shortname="near-mezze" class="mt-3" :identifier="selected" />
+        <Disqus shortname="near-mezze" class="mt-14" :identifier="selected" />
       </main>
     </div>
 

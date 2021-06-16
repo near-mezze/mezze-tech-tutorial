@@ -22,31 +22,23 @@ slug: lottery
 
 This tutorial assumes you have completed the <a href="/thanks">Thanks Tutorial</a>, so there wont' be as much stuff about local setup, _call_ vs _view_ functions, etc.
 
-What we _will_ take a closer look at using this tutorial is Testing. In _Thanks_, we build Unit Tests. _Lottery_ will also have Unit Tests, but will also have Simulation Tests. 
+What _is_ new is the funds transferring. This Smart Contract takes wagers, adds them to a pot, and distributes that entire pot to the winner.
 
-Whether you build your Smart Contracts in _WebAssembly_ or _Rust_, simulation tests _must_ be written in _Rust_. Learn more about [Rust](https://www.rust-lang.org/) and building [Simulation Tests on NEAR](https://github.com/near-examples/simulation-testing)
+This is a bit difficult to demonstrate, but the <a href="adding-scripts">Adding Scripts</a> section allows us to run several Command Line Interface (CLI) instances or as I will refer to them, terminal windows, to give you a better idea of what is going on when this (or any) Smart Contract is being called.
 
-Unit Tests are great for checking edge cases when calling your Smart Contract. They don't need you to compile your code into a `wasm`, nor do they need to tap into NEAR _testnet_ or any network for that matter. However, Unit tests are unable to call other contracts (cross-contract calls), so if your contract sends or requests funds from another contract, for instance, you won't be able to use a Unit Test to check that it works. This is where Simulation Testing comes in.
+If you desire to add a UI layer on top of this Smart Contract, you can see how that might work by navigating to the <a href="what-next">What Next?</a> section of this tutorial. The code for the UI below can be found in this tutorial's repo in the
+`components/contract-ui/lottery` folder. 
 
-Simulation Tests _do_ require a `wasm` file that are built using the `cargo build` command. The build is then deployed to a simulation chain giving it the ability to simulate cross-contract calls.
+You can find more examples of Smart Contracts with UIs at [examples.near.org](https://examples.near.org/)
 
 ## Local Setup
 
 
-
-
-<!-- TODO: omit any simulation/Rust stuff from here and from the repo if not using -->
-
-
-
-
-
-
-There is a repo of this project with several branches. The first branch, `getting-started`, is the bare bones project. It will have all of the files we need, but most of them will be empty. The others you will find are:
+The repo for this project comes with several branches so be sure you fetch them all. The first branch, `getting-started`, is the bare bones project. It will have all of the files we need to start, but most of them will be empty. The other branches you will find are:
 
 1. `getting-started`
 2. `functions/empty` & `functions/solution`
-3. `testing/empty` & `testing/solution`
+3. `tests/unit/empty` & `tests/unit/solution`
 4. `scripts/empty` & `scripts/solution`
 
 <br/>
@@ -56,62 +48,39 @@ There is a repo of this project with several branches. The first branch, `gettin
 Clone the repository below or run this command:
 
 ```bash
-$ git clone git clone git@github.com:near-mezze/sample--lottery.git project-name
-$ cd project-name
-# run scripts in package.json with "yarn <script name>" or "npm run <script name>"
+  
+  $ git clone git clone git@github.com:near-mezze/lottery.git project-name
+  $ cd project-name
+  #
+  # run scripts in package.json with "yarn <script name>" or "npm run <script name>"
+  #
 ```
-
-<h3 class="mt-10 mb-4">Rust</h3>
-
-Simulation tests must be written in _Rust_, but you can still use _Rust_ even if your code is already written in _AssemblyScript_. 
-
-You simply need to add it to your project.
-
-Check if _Rust_ is installed with `rustc --version`.
-
-To install _Rust_:
-
-```bash
-  $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-Now you can use the _Rust_ command `cargo` to run your simulation tests.
-
 
 Now switch to the `getting-started` branch.
 
 <h3>File Structure</h3>
 
 ```
-  sample--lottery
-  ┣ simulation/
-  ┃ ┣ src/
-  ┃ ┣ Cargo.toml
-  ┃ ┗ README.md
+  lottery
   ┣ src/
   ┃ ┣ lottery/
   ┃ ┣ as-pect.d.ts
   ┃ ┣ as_types.d.ts
   ┃ ┣ tsconfig.json
   ┃ ┗ utils.ts
-  ┣ target/
-  ┃ ┣ debug/
-  ┃ ┣ .rustc_info.json
-  ┃ ┗ CACHEDIR.TAG
   ┣ .gitignore
-  ┣ Cargo.lock
-  ┣ Cargo.toml
   ┣ README.md
   ┣ as-pect.config.js
   ┣ asconfig.json
   ┣ package.json
   ┗ yarn.lock
+
 ```
 
 This is pretty much what your folder structure will look like if you used the
  <nobr><span class="code-emphasis inline-block">create-near-app</span></nobr> command.
 
-The main folders we will be using is:
+The main folder we will be using is:
 
 `/lottery/`
 
@@ -332,7 +301,9 @@ Although it's almost 200 lines of code, there are only 4 _call_ functions we nee
 - `configure_fee()`
 - `reset()`
 
-The `play()` method evaluated whether the current player has played before, checks what the fee strategy with `fee`, which calls `FeeStrategies.calculate_fee()`, and runs the game with `won()`, which calls `Lottery.play()`:
+<br/>
+
+Let's take a closer look at the `play()` method:
 
 ```typescript{87, 98}{numberLines:80}
   @mutateState()
@@ -362,11 +333,19 @@ The `play()` method evaluated whether the current player has played before, chec
   }
   ```
 
-So, we have our main Class calling two _other_ classes, `FeeStrategies` and `Lottery`, in order to run the lottery and check for winners.
+The `play()` method evaluates whether the current player has played before, 
+
+Then it checks what the fee strategy is with `fee()`, which in turn calls `FeeStrategies.calculate_fee()`
+
+Then the actual drawing is done by calling `won()`, which in turn calls `Lottery.play()`. 
+
+So, we have our main class calling two _other_ classes, `FeeStrategies` and `Lottery`, in order to run the lottery and check for winners.
+
+You still with me?
 
 Let's take a look at those classes.
 
-<h3 class="mt-10 mb-4">Class Lottery</h3>
+<h3 class="mt-10 mb-4">Lottery Class</h3>
 
 Paste the following into `src/lottery/assembly/lottery.ts`:
 
@@ -404,7 +383,7 @@ Line 15 checks that the value returned by `rng` is within the lowest 20% of the 
 
 If you aren't to sure about `u32` or `f64`, let's imagine the lottery picks a random number between 1 and 100. This would mean that according to line 15, if our roll is less than or equal to 20, we win. 
 
-<h3 class="mt-10 mb-4">Class FeeStrategy</h3>
+<h3 class="mt-10 mb-4">FeeStrategy Class</h3>
 
 Moving on to the `FeeStrategies`, paste the following into `fee-strategies.ts`
 
@@ -522,10 +501,10 @@ Now that we have our code compiled, we can use the NEAR CLI to deploy it.
 
 Note: if you do not specify the `./build/release/lottery.wasm` path in the above command, NEAR defaults to checking for `out/main.wasm` 
 
-You should see another newly generated folder called `neardev`. This is a really cool feature of NEAR, where you can quickly create and use a _testnet_ account for your contract.  
+You should see another newly generated folder called `neardev`. This is a really cool feature of NEAR where you can quickly create and use a _testnet_ account for your contract.  
 
 <pre class="language-text">
-  sample--lottery $ <span class="token function">near</span> dev-deploy ./build/release/lottery.wasm
+  lottery $ <span class="token function">near</span> dev-deploy ./build/release/lottery.wasm
   Starting deployment. <span class="code-emphasis">Account id: dev-1622755101091-2932922</span>, 
   node: https://rpc.testnet.near.org, helper: https://helper.testnet.near.org,
   file: ./build/release/lottery.wasm
@@ -535,12 +514,12 @@ You should see another newly generated folder called `neardev`. This is a really
   Done deploying to dev-1622755101091-2932922
 </pre>
 
-The account for the contract above is `dev-1622755101091-2932922`, which NEAR generated and placed in a newly created `neardev` folder in your root folder. Yours will be slightly different as it's created with a random number and a timestamp. We will be referencing the account above in some of the examples coming up, but simply replace with the one _you_ were given. 
+The account for the contract above is `dev-1622755101091-2932922`, which NEAR generated and placed in a newly created `neardev` folder in your root folder. Yours will be slightly different as it's created with a random number and a timestamp. We will be referencing the account above in some of the examples coming up, but simply replace it with the one _you_ were given, and you'll be good to go. 
 
-It's a bit confusing at first, but your contract is seen by NEAR as just another account; no different than your own _testnet_ account, except that this account has methods you can call on it. So let's call it!
+It's a bit confusing at first, but your contract is seen by NEAR as just another account; no different than your own _testnet_ account, except that this account has methods you can call on it. So let's start calling!
 
 <pre class="language-bash">
-  $ <span class="token function">near</span> call dev-1622755101091-2932922 play --accountId YOUR_OWN_TESTNET_ACCOUNT --amount $1                                
+  $ <span class="token function">near</span> call dev-1622755101091-2932922 play --accountId YOUR_OWN_TESTNET_ACCOUNT --amount 0                                
 </pre>
 
 You should see an `ExecutionError` about how the contract isn't initialized. If you try to initialize the contract more than once, you'll see a similar error thrown about that too. So, don't worry, NEAR CLI has got your back.
@@ -553,7 +532,7 @@ The other option is creating Classes to wrap our methods. This "singleton" style
 
 The one caveat about using Classes for your Smart Contracts is that you need to initialize them once they are deployed. NEAR CLI will remind you if you don't.
 
-Go ahead and run the following initialize the contract:
+Go ahead and run the following to initialize the contract:
 
 <pre class="language-bash">
   $ <span class="token function">near</span> call $CONTRACT_ACCOUNT init '{\"owner\":\"'$OWNER_ACCOUNT'\"}' --accountId $CONTRACT_ACCOUNT            
@@ -582,7 +561,9 @@ Go ahead and try calling the `play()` command again.
  <span class="code-emphasis inline-block>">''</span>
 </pre>
 
-So the player, `near-mezze-player.testnet` won 1 NEAR! That's great! I'm getting blockchain fever and the only prescription is more `play()` calls. Let's play again!
+So the player, `near-mezze-player.testnet` won 1 NEAR! That's fantastic! 
+
+I'm getting blockchain fever and the only prescription is more `play()` calls. Let's play again!
 
 <pre class="language-bash">
   type: <span class="code-green">'FunctionCallError'</span>,
@@ -595,7 +576,7 @@ So the player, `near-mezze-player.testnet` won 1 NEAR! That's great! I'm getting
 
 Wait wut?
 
-Ok, So let's review how a lottery works. People buy tickets hoping the numbers they pick match those from the drawing. The drawing happens and either no one wins the pot, or someone wins the pot, or a few people win the pot. Then what?
+Ok, So let's review how a lottery works. People buy tickets hoping the numbers they pick match those from the drawing. The drawing happens, and either no one wins the pot, someone wins the pot, or a few people win the pot. Then what?
 
 Well, if one or more people win the pot then there is no pot to win. So, the drawing needs to be reset. That's what that error message is saying: 
 
@@ -613,6 +594,11 @@ You shouldn't see a similar output as you did when you called `init`
 
 Now let's try playing again! Did you win? I didn't :/
 
+>  <div class="tip"> <info-icon size="1.5x" class="custom-class tip-icon mr-2 pt-1"></info-icon>If you're like me, and need a visual for what this Contract might look like with a UI, scroll down to the <a href="#what-next">What Next?</a> section to see a demo of Thanks with a simple UI layer. Code is in the repo of this tutorial in the 
+> <span class="code-emphasis inline-block">contract-ui/lottery</span> directory.
+> </div>
+<br/>
+
 <pre class="language-bash">
   Scheduling a call: dev-1622755101091-2932922.play()
   Receipt: 3HuByfdNnoR7qQS8dnGJd2c3HbCFTd1rWwttzoJpHiyx
@@ -624,7 +610,7 @@ Now let's try playing again! Did you win? I didn't :/
  <span class="code-emphasis inline-block>">''</span>
 </pre>
 
-Big Money! Big MOney! Big Money! Let's play again!!!
+Big Money! Big Money! Big Money! Let's play again!!!
 
 <pre class="language-bash">
   type: <span class="code-green">'FunctionCallError'</span>,
@@ -646,9 +632,9 @@ export class FeeStrategy {
     this.assert_valid_fee_strategy(strategy);
   }
 ```
-Ah. There it is `public strategy: StrategyType = StrategyType.Exponential`
+Ah. There it is -- `public strategy: StrategyType = StrategyType.Exponential`
 
-So we default to `Exponential` fee strategy. So, that means every subsequent play should cost the player exponentially more than before. But that doesn't make sense, because subsequent plays have all been 1 NEAR. Hmmm....
+So we default to `Exponential` fee strategy. That means every subsequent play should cost the player exponentially more than before. But that doesn't make sense, because subsequent plays have all been 1 NEAR. Hmmm....
 
 Let's take another look at `index.ts` where all this code is running.
 
@@ -663,7 +649,7 @@ Let's take another look at `index.ts` where all this code is running.
    */
 ```
 
-There is in on line 78. Blessed be the Comments!
+Line 78. Blessed be the Comments!
 
 So the fee is based in part on the number of players. Let's add one!
 
@@ -693,7 +679,7 @@ What if we wanted to increase our odds of winning? What method would fulfill tha
 What if we wanted to keep it simple with the fee strategies? Go ahead and run that `configure_fee` method on your own. It might not be obvious, but to set the fee strategy, you will run:
 
 <pre class="language-bash">
-  $ <span class="token function">near</span> call dev-1622755101091-2932922 configure_fee '{"strategy": 3}' --account_id dev-1622755101091-2932922
+  $ <span class="token function">near</span> call dev-1622755101091-2932922 configure_fee '{"strategy": 1}' --account_id dev-1622755101091-2932922
 </pre>
 
 As you can see, `strategy` takes an integer value of 0, 1, 2, or 3. These are mapped to the fee strategy types, `Free`, `Constant`, `Linear`, and `Exponential` respectively.
@@ -713,17 +699,23 @@ Seems pretty similar to the files in the `assembly/` directory. We have files fo
  - `lottery.unit.spec.ts` : _those methods specific to the Lottery class_
  - `fee-strategies.unit.spec.ts` : _those methods specific to the Fee Strategy class_
 
+<br/>
+
 You may wonder if the `Lottery` and `FeeStrategy` classes can be "called" like we've been doing thus far. 
 
-Well, yes and no. When we compile, we tell _AssemblyScript_ to check the `assembly` folder for our contract. It first looks for an `index.ts` file (which we have), and uses that for the contract code while compiling everything else in the `assembly/` directory so as to make it available to the code in `index.ts`. 
+Well, yes and no. When we compile, we tell _AssemblyScript_ to check the `assembly/` folder for our contract. It first looks for an `index.ts` file (which we have), and uses that for the contract code while compiling everything else in the `assembly/` directory so as to make it available to the code in `index.ts`. It doesn't really look for functions outside that `index.ts` file.
 
 There are several files where you can configure how _AssemblyScript_ compiles your code, and you can look at your `asconfig.json` files for clues about where it should look. [Learn more about how _AssemblyScript_ compiles your code](https://www.assemblyscript.org/compiler.html).
 
-So that's the "No" part of the answer. The "Yes" part refers to Unit Testing. You can test anything you want, any function, any block of code, any file. You simply need to be specific when you call your tests.
+So that's the "No" part of the answer. 
 
-This is in part due to how `as-pect` the _AssemblyScript_ testing library works. When you Unit Test your NEAR Smart Contracts, you don't need to connect to any network, you don't need the auto-generated _testnet_ account created by the `near dev-deploy` command. You don't even need to compile your code into a `wasm` file. 
+The "Yes" part refers to Unit Testing. You can test anything you want, any function, any block of code, any file. You simply need to be specific when you call your tests.
 
-To configure account `$OWNER`, etc., you import and use `VMContext` from `near-sdk-as`. That's how `Context` is set in the scope of each test you write. Take a look at where and how `VMContext` is being used in the `__tests__/` files.
+This is in part due to how `as-pect`, the _AssemblyScript_ testing library, works. When you Unit Test your NEAR Smart Contracts, you don't need to connect to any network, you don't need the auto-generated _testnet_ account created by the `near dev-deploy` command. You don't even need to compile your code into a `wasm` file. 
+
+To configure the various accounts in play, etc., you use `VMContext` imported from `near-sdk-as`. That's how `Context` is set in the scope of each test you write. 
+
+Take a look at where and how `VMContext` is being used in the `__tests__/` files, specifically `index.unit.spec.ts`.
 
 You can run all the tests in `__tests__/` or individually.
 
@@ -787,7 +779,7 @@ Unit Tests are very semantic; almost pseudo-code. If you aren't inspired yet, si
 
 We can automate our Smart Contract even more with some scripts. So, instead of running each _call_ or _view_ method from the terminal, we can place all of our executables in their own script files with as much commentary as we need. 
 
-Switch to the  `scripts/solution` branch. If you completed the _Thanks_ tutorial (which you should have at this point) then you'll recall a neat demonstration using the terminal to call and "watch" how this Smart Contract executes. Let's jump into that now.
+Switch to the  `scripts/solution` branch. If you completed the _Thanks_ tutorial (which you should have at this point) then you'll recall a neat demonstration using the terminal to call and "watch" how a Smart Contract executes. Let's jump into that now.
 
 You will be monitoring your _testnet_ accounts used in this project by cloning this project:
 
@@ -809,13 +801,15 @@ In this demonstration, you will open five terminals; two in `near-account-utils/
  - Terminal D (lottery directory): _handles account state of Player 1_
  - Terminal E (lottery directory): _handles account state of Player 2_
 
+<br/>
+
 So the way this works, is that you run the contract commands like before, but this time you set environmental variables, and run script files from the `scripts/` directory like so:
 
 ```bash
   # Terminal A
   lottery-directory: $ ./scripts/2.play.sh
 ```
-The terminal will likely throw a few errors about undefined variables. You do so with this command:
+The terminal will likely throw a few errors about undefined variables. You define them with this command:
 
 ```bash
   # Terminal A
@@ -828,7 +822,9 @@ These are the variables we will be using:
 - PLAYER: _update to player 1 or player 2 when switching players_
 - FEE: _your wager_
 
-Now open two new terminal windows in the `near-account-utils/`  directory and set your $CONTRACT env variable to the one generated by `near dev-deploy`:
+<br/>
+
+Now open two new terminal windows in the `near-account-utils/`  directory and set your `$CONTRACT` env variable to the one generated by `near dev-deploy`:
 
 ```bash
   # Terminal B
@@ -842,17 +838,17 @@ Now run this command:
   near-account-utils: $ watch -d -n 1 yarn storage $CONTRACT
 ```
 
-Your Terminal B window should start going a little nuts and create a ascii table with information about the state of your Smart Contract.
+Your Terminal B window should start going a little nuts and create an ascii table with information about the state of your Smart Contract.
 
 Move to the other terminal window you opened, and set the `$CONTRACT` env variable the same way you just did in Terminal B.
 
 <blockquote class="tip mb-4">
-<h3><info-icon size="1. mr-45x" class="custom-class pt-2"></info-icon></info-icon>
+<h3><info-icon size="1. mr-45x" class="custom-class tip-icon"></info-icon></info-icon>
 What is a Terminal??</h3><br/>
 
 <hr/>
 
-Just in case you're a bit confused about some terminology, "terminal", is synonymous with "bash", "shell", or any program presenting the Command Line Interface (CLI). 
+Just in case you're a bit confused about some terminology, "terminal" is synonymous with "bash", "shell", or any program presenting the Command Line Interface (CLI). 
 
 Bash is the language used in the CLI.
 
@@ -869,13 +865,13 @@ Now run this command:
   near-account-utils: $  watch -d -n 1 "near state $CONTRACT && echo && near keys $CONTRACT"
 ```
 
-Terminal C should become ablaze with information regarding your Smart Contract's account id.
+Terminal C should become ablaze with information regarding your Smart Contract's `accountId`.
 
-You now have 2 windows monitoring your Smart Contract's state.
+You now have two windows monitoring your Smart Contract's state.
 
-Each terminal window has its own scope regardless if its running in the same directory as other termainals/shells. So, you can open 2 terminals and set $PLAYER to different values in each of those terminals, and each terminal window will only recognize the $PLAYER you set within it.
+Each terminal window has its own scope regardless if its running in the same directory as other termainals/shells. So, you can open two terminals and set `$PLAYER` to different values in each of those terminals, and each terminal window will only recognize the specific `$PLAYER` value you set within it.
 
-With that in mind, let's open two more terminals in our `lottery/` directory.
+Let's keep the bash train going and open two more terminals in our `lottery/` directory.
 
 Set `$PLAYER` to player 1 in one terminal, and player 2 in the other terminal. 
 
@@ -909,20 +905,37 @@ Look at each terminal window you have opened to see how the information changes 
 
 If you have made it this far, CONGRATULATIONS!!!
 
-You have built a really simple (once you get to know it) Smart Contract that offers players a decent chance of winning some money!  
+You have built a sophisticated Smart Contract that offers players a decent chance of winning some money!  
 
 - You built multiple classes that feed into your Smart Contract to set rules for the game, like fee strategies and odds of winning.
 - You wrote Unit Tests to handle edge cases and other scenarios.
 - You dove into monitoring the state of contracts using scripts and env variables.
 - You installed `near-account-utils` and learned how to use it to check state and storage use of your Smart Contract.
+- You saw how funds get transferred from one account to another and under what circumstances that occurs.
   
 ## What Next?
 
-Definitely take some time to further explore the [Adding Scripts](#adding-scripts) section some more. Blockchain is not an easy concept to grasp, but tools like `near-account-utils` surface some of the inner workings for us. 
+Definitely take some time to further explore the [Adding Scripts](#adding-scripts) section. Blockchain is not an easy concept to grasp, but tools like `near-account-utils` surface some of the inner workings for us. 
 
-<lottery-form></lottery-form>
+If you haven't already, [join the community](https://near.org/community/)!
 
-Time to delve into UI territory if you're feeling frisky. You can find the code for the _Lottery_ UI in the `components/conracts-ui/` folder.
+Finally, it's time to delve into UI territory if you're feeling frisky. You can find the code for the _Lottery_ UI in the `components/contracts-ui/lottery` folder of this tutorial's [repo](https://github.com/near-mezze/mezze-tech-tutorial).
+
+<lottery-form class="my-8"></lottery-form>
+
+The above is pretty simple. Once you log in with your NEAR wallet, you should see your _testnet_ account appear as "Current Player". Several other _view_ methods on the _Lottery_ contract are also called. For example:
+
+_Lottery_ has 20% odds of winning, which is informed by `explain_lottery()`. 
+
+_Lottery_ sets the fee to 0, which is informed by `get_fee()`. 
+
+Go ahead and click "PLAY LOTTERY". You will be redirected to NEAR explorer every time NEAR requires you to authenticate a request, which is a lot when NEAR tokens are on the line.
+
+You can also open this page in another browser, sign in with another _testnet_ account, and switch between windows to see how the displays update each time "PLAY LOTTERY" is clicked.
 
 [Learn more about NEAR on the Front End](https://docs.near.org/docs/tutorials/front-end/naj-examples). 
+
+However, to get the most out of this demo, you should clone [lottery](https://github.com/near-mezze/lottery) (if you haven't already), and deploy it to _testnet_ with a new _testnet_ account. Be sure to initialize the contract with your own _testnet_ account as `$OWNER`. This way, you will have the ability to reset the drawing once a winner is drawn. Now go nuts!
+
+
 

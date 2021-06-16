@@ -68,6 +68,11 @@ span.code-emphasis.inline-block {
 }
 
 .bright {
+
+  .v-application .main a {
+    color: $brandPrimaryBright;
+  }
+
   code[class*="language-"],
   pre[class*="language-"] {
     color: $textBright;
@@ -75,11 +80,13 @@ span.code-emphasis.inline-block {
 
   :not(pre) > code[class*="language-"],
   pre[class*="language-"],
-  span.code-emphasis.inline-block {
+  span.code-emphasis.inline-block,
+  code.language-inline-text  {
     background: $sidebarBright;
   }
 
   :not(pre) > code[class*="language-text"], 
+  :not(pre) > code[class*="language-inline-text"], 
   span.code-emphasis {
     color: $textInlineCodeBright;
   }
@@ -135,6 +142,11 @@ span.code-emphasis.inline-block {
 }
 
 .dark {
+
+  .v-application .main a {
+    color: $brandPrimaryDark;
+  }
+
   code[class*="language-"],
   pre[class*="language-"] {
     color: $textDark;
@@ -142,11 +154,13 @@ span.code-emphasis.inline-block {
 
   :not(pre) > code[class*="language-"],
   pre[class*="language-"],
-  span.code-emphasis.inline-block {
+  span.code-emphasis.inline-block,
+  code.language-inline-text {
     background: $sidebarDark;
   }
 
   :not(pre) > code[class*="language-text"], 
+  :not(pre) > code[class*="language-inline-text"], 
   span.code-emphasis {
     color: $textInlineCodeDark;
   }

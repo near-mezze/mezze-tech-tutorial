@@ -79,12 +79,13 @@ a {
   background-color: #f9f8d0;
 }
 
+.tip-icon {
+  vertical-align: text-bottom;
+}
 
 .v-application .gridsome-highlight code[class*="language-"] {
   background: none;
 }
-
-
 
 /**
  * Add back the container background-color, border-radius, padding, margin

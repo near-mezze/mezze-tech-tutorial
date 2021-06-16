@@ -20,7 +20,7 @@ slug: thanks
 
 No. Seriously. Thanks! 
 
-Actually, that's the name of the Smart Contract we will be building today, [Thanks](https://github.com/Learn-NEAR/sample--thanks), which allows users to say "thanks" to other users by calling _their_ instance of this contract. 
+Actually, that's the name of the Smart Contract we will be building today, [Thanks](https://github.com/Learn-NEAR/thanks), which allows users to say "thanks" to other users by calling _their_ instance of this contract. 
 
 You can optionally attach tokens to your message, or even leave your message anonymously.
 
@@ -60,8 +60,8 @@ Throughout this tutorial, you will have the opportunity to engage with this cont
 
 Our calls to the contract will be through a command line interface like _Bash_ or _Terminal_.
 
-However, if you desire to add a UI layer on top of this Smart Contract, you can see how that might work by navigation to the <a href="what-next">What Next?</a> section of this tutorial. The code for the UI below can be found in this tutorial's repo in 
-`components/contract-ui/`. You can find more examples of Smart Contracts with UIs at [examples.near.org](https://examples.near.org/)
+However, if you desire to add a UI layer on top of this Smart Contract, you can see how that might work by navigating to the <a href="what-next">What Next?</a> section of this tutorial. The code for the UI below can be found in this tutorial's repo in 
+`components/contract-ui/thanks`. You can find more examples of Smart Contracts with UIs at [examples.near.org](https://examples.near.org/)
 
 By the end of this tutorial, you will have a deeper understanding of how NEAR smart contracts are built, tested, deployed, and used. With that knowledge, you will be able to build your own decentralized applications, which you can share with the NEAR community!
 
@@ -78,7 +78,7 @@ There is a repo of this project with several branches. The first branch, `gettin
 
 <br/>
 
-Do you see a pattern? The idea here is that each major section in this tutorial has a corresponding branch of the `sample--thanks` repo. We will be working with the `/solution` branches, and review the code in there, but you are always encouraged to use the `/empty` branches to build some of this logic on your own. 
+Do you see a pattern? The idea here is that each major section in this tutorial has a corresponding branch of the `thanks` repo. We will be working with the `/solution` branches, and review the code in there, but you are always encouraged to use the `/empty` branches to build some of this logic on your own. 
 
 
 Both `main` and `scripts/solution` will have the complete code. 
@@ -98,13 +98,16 @@ Otherwise, let's get started!
 Clone the repository below or run this command:
 
 ```bash
-$ git clone git clone git@github.com:near-mezze/sample--thanks.git project-name
-$ cd project-name
-# run scripts in package.json with "yarn <script name>" or "npm run <script name>"
+
+  $ git clone git clone git@github.com:near-mezze/thanks.git project-name
+  $ cd project-name
+  #
+  # run scripts in package.json with "yarn <script name>" or "npm run <script name>"
+  #
 ```
 
->  <div class="tip"> <info-icon size="1.5x" class="custom-class mr-2 pt-1"></info-icon>If you're like me, and need a visual for what this Contract might look like with a UI, scroll down to the <a href="#what-next">What Next?</a> section to see a demo of Thanks with a simple UI layer. Code is in the repo of this tutorial in the 
-> <span class="code-emphasis inline-block">contract-ui/</span> directory.
+>  <div class="tip"> <info-icon size="1.5x" class="custom-class tip-icon mr-2 pt-1"></info-icon>If you're like me, and need a visual for what this Contract might look like with a UI, scroll down to the <a href="#what-next">What Next?</a> section to see a demo of Thanks with a simple UI layer. Code is in the repo of this tutorial in the 
+> <span class="code-emphasis inline-block">contract-ui/thanks</span> directory.
 > </div>
 <br/>
 
@@ -114,26 +117,27 @@ Now switch to the `getting-started` branch.
 <h3>File Structure</h3>
 
 ```
-sample--thanks/
-┣ src/
-┃ ┣ thanks/
-┃ ┃ ┣ __tests__/
-┃ ┃ ┃ ┣ README.md
-┃ ┃ ┃ ┗ index.unit.spec.ts
-┃ ┃ ┣ assembly/
-┃ ┃ ┃ ┣ index.ts
-┃ ┃ ┃ ┗ models.ts
-┃ ┃ ┗ asconfig.json
-┃ ┣ as-pect.d.ts
-┃ ┣ as_types.d.ts
-┃ ┣ tsconfig.json
-┃ ┗ utils.ts
-┣ .gitignore
-┣ README.md
-┣ as-pect.config.js
-┣ asconfig.json
-┣ package.json
-┗ yarn.lock
+  thanks/
+    ┣ src/
+    ┃ ┣ thanks/
+    ┃ ┃ ┣ __tests__/
+    ┃ ┃ ┃ ┣ README.md
+    ┃ ┃ ┃ ┗ index.unit.spec.ts
+    ┃ ┃ ┣ assembly/
+    ┃ ┃ ┃ ┣ index.ts
+    ┃ ┃ ┃ ┗ models.ts
+    ┃ ┃ ┗ asconfig.json
+    ┃ ┣ as-pect.d.ts
+    ┃ ┣ as_types.d.ts
+    ┃ ┣ tsconfig.json
+    ┃ ┗ utils.ts
+    ┣ .gitignore
+    ┣ README.md
+    ┣ as-pect.config.js
+    ┣ asconfig.json
+    ┣ package.json
+    ┗ yarn.lock
+
 ```
 
 This is pretty much what your folder structure will look like if you used the
@@ -380,10 +384,10 @@ Now that we have our code compiled, we can use the NEAR CLI to deploy it.
 
 Note: if you do not specify the `./build/release/thanks.wasm` path in the above command, NEAR defaults to checking for `out/main.wasm` 
 
-You should see another newly generated folder called `neardev`. This is a really cool feature of NEAR, where you can quickly create and use a _testnet_ account for your contract.  
+You should see another newly generated folder called `neardev`. This is a really cool feature of NEAR where you can quickly create and use a _testnet_ account for your contract.  
 
 <pre class="language-text">
-  sample--thanks $ <span class="token function">near</span> dev-deploy ./build/release/thanks.wasm
+  thanks $ <span class="token function">near</span> dev-deploy ./build/release/thanks.wasm
   Starting deployment. <span class="code-emphasis">Account id: dev-1622755101091-2932922</span>, 
   node: https://rpc.testnet.near.org, helper: https://helper.testnet.near.org,
   file: ./build/release/thanks.wasm
@@ -641,23 +645,23 @@ If all goes well, you should see something like this:
 <pre class="language-bash">
     [Describe]: Send Message
   <br/>
-    <span style="color: green;">[Success]</span>: ✔ Throws AssertionError if string is empty
-    <span style="color: green;">[Success]</span>: ✔ Throws if message is too long
+    <span class="code-green">[Success]</span>: ✔ Throws AssertionError if string is empty
+    <span class="code-green">[Success]</span>: ✔ Throws if message is too long
   <br/>
     [Describe]: List Messages
 
-    <span style="color: green;">[Success]</span>:  ✔ Lists the last 10 messages
+    <span class="code-green">[Success]</span>:  ✔ Lists the last 10 messages
   <br/>
   [File]: src/thanks/__tests__/index.unit.spec.ts
-  [Groups]: <span style="color: green;">3 pass</span>, 3 total
-  [Result]: <span style="color: green;">✔ PASS</span>
+  [Groups]: <span class="code-green">3 pass</span>, 3 total
+  [Result]: <span class="code-green">✔ PASS</span>
   [Snapshot]: 0 total, 0 added, 0 removed, 0 different
-  [Summary]: <span style="color: green;">3 pass</span>,  0 fail, 3 total
+  [Summary]: <span class="code-green">3 pass</span>,  0 fail, 3 total
   [Time]: 7.091ms
   <br/>
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   <br/>
-  [Result]: <span style="color: green;">✔ PASS</span>
+  [Result]: <span class="code-green">✔ PASS</span>
   [Files]: 1 total
   [Groups]: 3 count, 3 pass
   [Tests]: 3 pass, 0 fail, 3 total
@@ -685,7 +689,7 @@ Unit Tests use many of the modules provided by `near-sdk-as` package, including 
 You can see it in use in the code above. You don't always need to use _VMContext_ , but if you have checks, like _Thanks_ does, on your functions, which check the owner of the contract, then _VMContext_ will be a real help. It has a bunch of methods allowing you to get the most out of your tests. <a href="https://github.com/near/near-sdk-as/blob/master/near-mock-vm/assembly/context.ts" target="_blank">Learn more about <em>VMContext</em></a>.
 
 <blockquote class="tip">
-<h3><info-icon size="1 mr-4.5x" class="custom-class pt-2"></info-icon>Troubleshooting Bash Errors</h3><br/>
+<h3><info-icon size="1 mr-4.5x" class="custom-class tip-icon pt-2"></info-icon>Troubleshooting Bash Errors</h3><br/>
 <hr/> 
 
 You run into some weird issues in the terminal when running tests. Make sure you haven't added any unnecessary dependencies. [Learn more about writing Unit Tests in _AssemblyScript_](https://dev.to/jtenner/testing-with-assemblyscript-and-the-usefulness-of-value-3egn).
@@ -750,7 +754,7 @@ Before using the form below, please make sure you have a _testnet_ account. You 
 
 <thanks-form></thanks-form>
 
-Refer to the `contract-ui/` folder in this repo to see the code for the above form. See if you can transplant it into your local copy of `sample--thanks` using Vue.
+Refer to the `contract-ui/thanks` folder in this repo to see the code for the above form. See if you can transplant it into your local copy of `thanks` using Vue.
 
 
 
