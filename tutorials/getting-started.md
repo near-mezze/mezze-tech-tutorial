@@ -5,9 +5,10 @@ slug: getting-started
 
 ## What is NEAR?
 
-<a target="_blank" href="https://near.org">NEAR</a> is an open source platform that accelerates the development of decentralized applications. I could go on and on. Ok, I will:
+<a target="_blank" href="https://near.org">NEAR</a> is an open source platform that accelerates the development of decentralized applications. I could go on and on. Ok, I will.
 
-_From near.org_:
+_From near.org_
+
 <blockquote class="mb-4">
   <span class="left-quote">&ldquo;</span><em>So what is NEAR (aka “the NEAR Platform”)? NEAR is a decentralized development platform built on top of the NEAR Protocol, which is a public, sharded, developer-friendly, proof-of-stake blockchain. Put another way, NEAR is like a public community-run cloud platform.  That means it is a highly scalable, low cost platform for developers to create decentralized apps on top of. While it’s built on top of the NEAR Protocol blockchain, the NEAR Platform also contains a wide range of tooling from explorers to CLI tools to wallet apps to interoperability components which help developers build much more easily and the ecosystem to scale more widely.</em>
   <br/>
@@ -17,11 +18,11 @@ _From near.org_:
 
 Join the [NEAR ecosystem](https://airtable.com/shrkb3VSkDRf3BKjv)!
 
-## What are Smart Contracts?
+## What are Contracts?
 
-Smart Contracts are the back-end of your application that runs code and stores data on the blockchain. All smart contracts on NEAR must be compiled to <a target="_blank" href="https://webassembly.org">_WebAssembly_</a> or simply _WASM_. Currently, NEAR supports two languages <a target="_blank" href="https://www.assemblyscript.org">_AssemblyScript_</a> and <a target="_blank" href="https://www.rust.org">_Rust_</a> with custom software development kits (SDKs) to assist in their creation.
+Sometimes called "smart" contracts are the back-end of your application.  Contracts control the code and data that runs on the blockchain. All contracts on NEAR must be compiled to <a target="_blank" href="https://webassembly.org">_WebAssembly_</a> or simply _WASM_. Currently, NEAR supports two languages <a target="_blank" href="https://www.assemblyscript.org">_AssemblyScript_</a> and <a target="_blank" href="https://www.rust.org">_Rust_</a> with custom software development kits (SDKs) to assist in their creation.
 
-Developers write smart contracts, deploy them to the network (actually, we could say "they deploy the contract to a specific account that they control"), and then invoke methods on the contract interface.  Once a method (aka function) is called, the contract "wakes up", runs the method code and then "shuts down" (like a serverless function).  
+Developers write contracts, deploy them to the network (actually, we could say "they deploy the contract to a specific account that they control"), and then invoke methods on the contract interface.  Once a method (aka function) is called, the contract "wakes up", runs the method code and then "shuts down" (like a serverless function).  
 
 Functions are grouped into two types: `view` function or `change` function.
 
@@ -31,33 +32,26 @@ Functions are grouped into two types: `view` function or `change` function.
 
 If you are familiar with the terms "setter" and "getter", or http GET and POST requests, or read/write access, you may assume that view/call functions share this same relationship. It's important to be aware what your functions are doing so you can use the correct syntax when writing and calling them.
 
-<blockquote class="tip"><info-icon size="1.5x" class="custom-class tip-icon mr-2 pt-1"></info-icon>When in doubt of whether your contract method is
-a `change` or `view` function, check if gas is used when 
-you call it. `View` functions are "free" (paid for by the RPC server host), while `change` functions cost gas. <a target="_blank" href="https://docs.near.org/docs/concepts/gas">Learn more about NEAR gas fees</a>.</blockquote> 
+<blockquote class="tip"><info-icon size="1.5x" class="custom-class tip-icon mr-2 pt-1"></info-icon>When in doubt of whether your contract method is a `change` or `view` function, check if you paid for the gas when you called it. `View` functions are "free" (paid for by the RPC server host), while `change` functions cost you gas. <a target="_blank" href="https://docs.near.org/docs/concepts/gas">Learn more about NEAR gas fees</a>.</blockquote> 
 
 
 ## General Development Setup
 
-Before diving right in, take a few moments to install a few global dependencies, so you don't have to worry about them later. 
+Take a moment to install a few global dependencies so you don't have to worry about them later. 
 
 We will be developing in _NodeJS_, and using _VSCode_ as our IDE.
 
 NEAR CLI: _Command line Swiss Army knife for NEAR Protocol used to deploy and interact with contracts on the NEAR network_
 
-NodeJS^v12.x: _Backend JS framework allowing NEAR programs to run (note that we require >=v12)_
+NodeJS^v12.x: _Backend JS framework supporting NEAR development tools (note that we require NodeJS >=v12)_
 
-Typescript: _Allows us to write AssemblyScript code_
+AssemblyScript: _A new and innovative programming language that looks and feels just like JavaScript / TypeScript.  We use it to write contracts that are then compiled to Wasm and deployed to the NEAR platform_
 
-AssemblyScript: _Allows us to write WebAssembly code (what NEAR can use to run our smart contracts) in Typescript so we don't have to learn a new language_
+Rust: _A high performance, mature progrmaming language that we use to write contracts that are then compiled to Wasm and deployed to the NEAR platform.  Rust is required to write simulation tests for contracts (this is required when modeling cross-contract calls in a test scenario)_
 
-Rust: _Alternate language to AssemblyScript for smart contracts, but is required to write any and all simulation tests_
+Vue: _This will be the front end framework we will be using to build our snazzy UI for our web 3 app_
 
-Vue: _This will be the front end framework we will be using to build our smart contracts a snazzy UI_
-
-In order to deploy your smart contract, it will need to live in a repo like Github where NEAR has read/write access to it. When you use the cli command `$ near deploy...`, NEAR uses that git repo access you've configured ahead of time to push your project to it, and then publishes your project to NEAR Testnet where it can be available to interact with by you and other NEAR Testnet accounts.
-
-Your IDE may freak out at some of the syntax so make sure you have all the plugins and extensions installed and activated so you can properly leverage it. _VSCode_ has loads of stuff to help with development in _AssemblyScript_. [Learn more about _AssemblyScript_ for _VSCode_](https://marketplace.visualstudio.com/items?itemName=saulecabrera.asls).
-
+Make sure you have all the plugins and extensions installed and activated so you get the right syntax highlighting and autocompletion. _VSCode_ has loads of stuff to help with development in _AssemblyScript_. [Learn more about _AssemblyScript_ for _VSCode_](https://marketplace.visualstudio.com/items?itemName=saulecabrera.asls).
 
 <blockquote class="tip" style="margin-top: 1rem;">
   <info-icon size="1.5x" class="custom-class mr-2 tip-icon pt-1"></info-icon><strong>When you're ready to switch over from a dev contract account to a permanent one, here's how:</strong><br/>
