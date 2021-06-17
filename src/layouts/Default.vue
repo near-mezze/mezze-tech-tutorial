@@ -4,19 +4,8 @@
       <Header :menuToggle="sidebar" />
       <Sidebar v-if="sidebar" />
       <main class="main" :class="{'main--no-sidebar': !sidebar, 'main--sidebar-is-open' : this.$store.state.sidebarOpen}">
-        <highlightable
-          @highlight="onHighlight"
-          @dismiss="onDismiss"
-        >
-          <slot/>
-        <!-- <Disqus shortname="near-mezze" class="mt-14" :identifier="selected" /> -->
-        </highlightable>
+        <slot/>
       </main>
-      <BaseTint v-if="showComment" @close="onDismiss">
-        {% if page.comments == true %}
-        {% include comments.html %}
-        {% endif %}
-      </BaseTint>
     </div>
 
   </v-app>
@@ -33,30 +22,11 @@ query {
 <script>
 import Header from '~/components/Header.vue'
 import Sidebar from '~/components/Sidebar.vue'
-import BaseTint from '~/components/BaseTint.vue'
-import CommentForm from '~/components/CommentForm.vue'
 
 export default {
-  data() {
-    return {
-      showComment: false,
-      selected: ''
-    }
-  },
-  methods: {
-    onHighlight(text) {
-      this.showComment = true
-      this.selected = text
-    },
-    onDismiss() {
-      this.showComment = false
-    }
-  },
   components: {
     Header,
-    Sidebar,
-    BaseTint,
-    CommentForm
+    Sidebar
   },
   props: {
     sidebar: {
@@ -109,20 +79,4 @@ export default {
   }
 }
 
-#disqus_thread {
-  margin: auto;
-  max-width: 90%;
-  background: #fff;
-  border-radius: 10px;
-  padding: 27px;
-  z-index: 2;
-  background: #333;
-}
-
-@media screen and (min-width: 650px) {
-  #disqus_thread {
-    min-width: 550px;
-    max-width: 50%;
-  }
-}
 </style>

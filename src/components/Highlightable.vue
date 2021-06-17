@@ -14,11 +14,8 @@
         class="item"
         @click.prevent="handleAction('highlight')"
       >
-        <!-- <github-icon size="1.5x" class="custom-class"></github-icon> -->
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-          <path fill="#000000" d="M18.5,1.15C17.97,1.15 17.46,1.34 17.07,1.73L11.26,7.55L16.91,13.2L22.73,7.39C23.5,6.61 23.5,5.35 22.73,4.56L19.89,1.73C19.5,1.34 19,1.15 18.5,1.15M10.3,8.5L4.34,14.46C3.56,15.24 3.56,16.5 4.36,17.31C3.14,18.54 1.9,19.77 0.67,21H6.33L7.19,20.14C7.97,20.9 9.22,20.89 10,20.12L15.95,14.16"/>
-           <text>COMMENT</text>
-        </svg>
+        <github-icon size="1.5x" class="custom-class"></github-icon>
+        <strong class="ml-2">COMMENT</strong>
       </span>
     </div>
     <slot/>
@@ -68,8 +65,12 @@ export default {
         return
       }
       const topMid = relativeBound.x + (selectedBound.width/2)
+      console.log(selectedBound)
+      console.log(parentBound)
+      console.log(relativeBound)
+
       this.x = topMid
-      this.y = selectedBound.y + window.scrollY - 110
+      this.y = selectedBound.y + window.scrollY - 270
       this.showTools = true
       this.selectedText = selection.toString()
     },
@@ -132,11 +133,11 @@ p {
 }
 
 .item:hover path {
-  fill: #1199ff;
+  fill: #10c186;
 }
 
 .item:hover {
-  color: #1199ff;
+  color: #10c186;
 }
 
 .item + .item {

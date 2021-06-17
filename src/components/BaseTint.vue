@@ -11,6 +11,11 @@
         open: true
       }
     },
+    created() {
+      this.$on('posted', () =>{
+        this.close()
+      })
+    },
     methods: {
       close() {
         this.$emit('close')
@@ -24,6 +29,7 @@
 
 <style scoped>
   .tint {
+    display: flex;
     position: fixed;
     left: 0;
     top: 0;

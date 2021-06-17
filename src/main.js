@@ -11,22 +11,14 @@ import ThanksForm from '~/components/contract-ui/thanks/ThanksForm.vue'
 import LotteryForm from '~/components/contract-ui/lottery/LotteryForm.vue'
 import Highlightable from '~/components/Highlightable.vue'
 
-// import Vssue from 'vssue'
-// import GithubV3 from '@vssue/api-github-v3'
-// import 'vssue/dist/vssue.css'
+
 import {GithubIcon, HelpCircleIcon} from 'vue-feather-icons'
-import VueDisqus from 'vue-disqus'
 
 require("prismjs/plugins/line-numbers/prism-line-numbers.css")
 require("prismjs/plugins/command-line/prism-command-line.css")
 
-// import axios from 'axios'
-// import VueAxios from 'vue-axios'
-
 
 export default function (Vue, { router, head, isClient, appOptions }) {
-  // for GH comments
-  // Vue.use(VueAxios, axios)
   
   // out-of-the-box slick layouts plus material design classes
   Vue.use(Vuetify);
@@ -48,16 +40,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   // Add Medium Style Select Text to Comment Functionality
   Vue.component('highlightable', Highlightable)
   
-  // allows users to comment via GH issues on any text they select
-  Vue.use(VueDisqus)
-  // Vue.use(Vssue, {
-  //   api: GithubV3,
-  //   owner: process.env.GRIDSOME_REPO_OWNER,
-  //   repo: process.env.GRIDSOME_REPO_NAME,
-  //   clientId: process.env.GRIDSOME_VSSUE_CLIENT_ID,
-  //   clientSecret: process.env.GRIDSOME_VSSUE_CLIENT_SECRET
-  // })
-
   // Add attributes to HTML tag
   head.htmlAttrs = { lang: 'en' }
 

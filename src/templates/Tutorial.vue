@@ -1,13 +1,22 @@
 <template>
-
+<div>
   <Layout>
     <h1>
       {{ $page.tutorial.title }}
     </h1>
     <div ref="content">
-      <VueRemarkContent/>
+      <highlightable
+        @highlight="onHighlight"
+        @dismiss="onDismiss"
+      >
+        <VueRemarkContent/>
+      </highlightable>
     </div>
   </Layout>
+    <BaseTint v-if="showComment" @close="onDismiss">
+      <comment-form :page="$page.tutorial.title" :selected="selected"></comment-form>
+    </BaseTint>
+    </div>
 </template>
 
 <page-query>
@@ -22,7 +31,28 @@
 </page-query> 
 
 <script>
+import BaseTint from '~/components/BaseTint.vue'
+import CommentForm from '~/components/CommentForm.vue'
 export default {
+  data() {
+    return {
+      showComment: false,
+      selected: ''
+    }
+  },
+  methods: {
+    onHighlight(text) {
+      this.showComment = true
+      this.selected = text
+    },
+    onDismiss() {
+      this.showComment = false
+    }
+  },
+  components: {
+    BaseTint,
+    CommentForm
+  },
   metaInfo() {
     return {
       title: this.$page.tutorial.title,
