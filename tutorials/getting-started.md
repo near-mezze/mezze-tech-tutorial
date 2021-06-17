@@ -21,18 +21,19 @@ Join the [NEAR ecosystem](https://airtable.com/shrkb3VSkDRf3BKjv)!
 
 Smart Contracts are the back-end of your application that runs code and stores data on the blockchain. All smart contracts on NEAR must be compiled to <a target="_blank" href="https://webassembly.org">_WebAssembly_</a> or simply _WASM_. Currently, NEAR supports two languages <a target="_blank" href="https://www.assemblyscript.org">_AssemblyScript_</a> and <a target="_blank" href="https://www.rust.org">_Rust_</a> with custom software development kits (SDKs) to assist in their creation.
 
-Another aspect of Smart Contracts is that there are two types: Call Functions, and View Functions.
+Developers write smart contracts, deploy them to the network (actually, we could say "they deploy the contract to a specific account that they control"), and then invoke methods on the contract interface.  Once a method (aka function) is called, the contract "wakes up", runs the method code and then "shuts down" (like a serverless function).  
 
-Call Functions mutate state. They change something in your storage regarding the contract. They basically add or remove data.
+Functions are grouped into two types: `view` function or `change` function.
 
-View Functions simply read the data. You may have a method that returns a list of recent transactions. That's a view function.
+`Change Functions` mutate state. They change something in your storage regarding the contract. They basically add or remove data.
+
+`View Functions` simply read the data. You may have a method that returns a list of recent transactions. That's a `view` function.
 
 If you are familiar with the terms "setter" and "getter", or http GET and POST requests, or read/write access, you may assume that view/call functions share this same relationship. It's important to be aware what your functions are doing so you can use the correct syntax when writing and calling them.
 
 <blockquote class="tip"><info-icon size="1.5x" class="custom-class tip-icon mr-2 pt-1"></info-icon>When in doubt of whether your contract method is
-a call or view function, check if gas is used when 
-you call it. View functions are free, while call 
-functions cost gas. <a target="_blank" href="https://docs.near.org/docs/concepts/gas">Learn more about NEAR gas fees</a>.</blockquote> 
+a `change` or `view` function, check if gas is used when 
+you call it. `View` functions are "free" (paid for by the RPC server host), while `change` functions cost gas. <a target="_blank" href="https://docs.near.org/docs/concepts/gas">Learn more about NEAR gas fees</a>.</blockquote> 
 
 
 ## General Development Setup
@@ -41,7 +42,7 @@ Before diving right in, take a few moments to install a few global dependencies,
 
 We will be developing in _NodeJS_, and using _VSCode_ as our IDE.
 
-NEAR CLI: _Deploys Smart Contracts to the NEAR networks_
+NEAR CLI: _Command line Swiss Army knife for NEAR Protocol used to deploy and interact with contracts on the NEAR network_
 
 NodeJS^v12.x: _Backend JS framework allowing NEAR programs to run (note that we require >=v12)_
 
