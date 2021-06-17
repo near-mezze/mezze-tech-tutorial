@@ -9,10 +9,10 @@ slug: thanks
   - time to complete: **80 mins**
   - level of difficulty: **moderate**
   - prerequisites
+    - NEAR TestNet account
     - basic Javascript
     - basic Bash
     - basic Git
-    - NEAR.testnet account
 
 </blockquote>
 
@@ -20,36 +20,40 @@ slug: thanks
 
 No. Seriously. Thanks! 
 
-Actually, that's the name of the Smart Contract we will be building today, [Thanks](https://github.com/Learn-NEAR/thanks), which allows users to say "thanks" to other users by calling _their_ instance of this contract. 
+Actually, that's the name of the contract we will be building today, [Thanks](https://github.com/Learn-NEAR/thanks), which allows users to say "thanks" to other users by calling _their_ instance of this contract. 
 
 You can optionally attach tokens to your message, or even leave your message anonymously.
 
 Of course keep in mind that your signing account will be visible on the blockchain via NEAR Explorer even if you send an anonymous message; It just will be omitted when the receiver calls certain _other_ functions on the contract. 
 
-This is a simple demonstration of how smart contracts work, and how to call them.
+This is a simple demonstration of how contracts work, and how to call them.  We're going to use AssemblyScript
 
-We are going to use a mixture of functions and classes, then we will refactor everything into classes. Initially, the classes you will see basically allow us to organize data as if it was wrapped in an object literal. _TypeScript_ and _AssemblyScript_ are soooo hyper aware of how you organize your data structures, and they start to turn rabid if you want to simply assign an object to a variable:
-
-```typescript
-const myObject: object = {prop: "val"}
-```
-
-That looks simple, right? We declared a variable, signed a type `object` to it, and assigned an object literal as its value. NOOOO! Instead, you have to do this number:
+You will need to know about functions and classes to make the most out of AssemblyScript.
 
 ```typescript
+// in this version we create a new MyClass definition
+// with a constructor function and a single instance member
 @nearBindgen
-export class LongWindedWayOfCreatingASimpleObject {
-  prop: string
-  constructor(quest: string) {
-    this.prop = val
+export class MyClass {
+  public val: string
+  constructor(val: string) {
+    this.val = val
+  }
+}
+
+// this is the shorthand version supported by AssemblyScript
+// of the same thing above
+@nearBindgen
+export class MyClass {
+  constructor(public val: string) {
   }
 }
 ```
 
-Then you can _finally_ use it similarly as before:
+You would use this class as follows:
 
 ```typescript
-const myObject = new LongWindedWayOfCreatingASimpleObject({val: "Geesh! All this for an object?!"});
+const myObject = new MyClass({val: "some value"});
 ```
 
 Furthermore, you will have to continue to reference that class if you have an array that you intend to push it to. So, maybe use shorter names not born out of frustration.
