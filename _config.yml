@@ -8,12 +8,12 @@
 #
 # for me, this line reads:
 # https://staticman-travisdownsio.herokuapp.com/v2/entry/travisdowns/travisdowns.github.io/master/comments
-staticman_url: https://mezze-tech-bot.herokuapp.com/v2/entry/near-mezze/mezze-tech-tutorials/main/comments
+staticman_url: https://mezze-tech-bot.herokuapp.com/v2/entry/near-mezze/mezze-tech-tutorials/master/comments
 
 repository: "near-mezze/mezze-tech-tutorials"
 comments:
   provider  : "staticman_v2"
   staticman:
-    branch    : "main"
+    branch    : "master"
 
 search: true
