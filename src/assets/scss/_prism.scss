@@ -69,8 +69,12 @@ span.code-emphasis.inline-block {
 
 .bright {
 
-  .v-application .main a {
+  .v-application .main :not(h2) > a {
     color: $brandPrimaryBright;
+
+    &.git {
+      color: $textDark;
+    }
   }
 
   code[class*="language-"],
@@ -143,8 +147,12 @@ span.code-emphasis.inline-block {
 
 .dark {
 
-  .v-application .main a {
+  .v-application .main :not(h2) > a {
     color: $brandPrimaryDark;
+
+    &.git {
+      color: $textBright;
+    }
   }
 
   code[class*="language-"],

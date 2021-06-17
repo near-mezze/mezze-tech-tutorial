@@ -4,9 +4,19 @@
       <Header :menuToggle="sidebar" />
       <Sidebar v-if="sidebar" />
       <main class="main" :class="{'main--no-sidebar': !sidebar, 'main--sidebar-is-open' : this.$store.state.sidebarOpen}">
-        <slot/>
-        <Disqus shortname="near-mezze" class="mt-14" :identifier="selected" />
+        <highlightable
+          @highlight="onHighlight"
+          @dismiss="onDismiss"
+        >
+          <slot/>
+        <!-- <Disqus shortname="near-mezze" class="mt-14" :identifier="selected" /> -->
+        </highlightable>
       </main>
+      <BaseTint v-if="showComment" @close="onDismiss">
+        {% if page.comments == true %}
+        {% include comments.html %}
+        {% endif %}
+      </BaseTint>
     </div>
 
   </v-app>
