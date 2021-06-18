@@ -35,6 +35,7 @@ If you are familiar with the terms "setter" and "getter", or http GET and POST r
 a `change` or `view` function, check if gas is used when 
 you call it. `View` functions are "free" (paid for by the RPC server host), while `change` functions cost gas. <a target="_blank" href="https://docs.near.org/docs/concepts/gas">Learn more about NEAR gas fees</a>.</blockquote> 
 
+<!-- TODO: ADD IMAGES OF VIEW AND CALL FUNCTION GAS CONSUMPTION FROM EXPLORER -->
 
 ## General Development Setup
 
