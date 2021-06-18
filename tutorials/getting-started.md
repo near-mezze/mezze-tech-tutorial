@@ -47,7 +47,7 @@ NodeJS^v12.x: _Backend JS framework supporting NEAR development tools (note that
 
 AssemblyScript: _A new and innovative programming language that looks and feels just like JavaScript / TypeScript.  We use it to write contracts that are then compiled to Wasm and deployed to the NEAR platform_
 
-Rust: _A high performance, mature progrmaming language that we use to write contracts that are then compiled to Wasm and deployed to the NEAR platform.  Rust is required to write simulation tests for contracts (this is required when modeling cross-contract calls in a test scenario)_
+Rust: _A high performance, mature programming language that we use to write contracts that are then compiled to Wasm and deployed to the NEAR platform.  Rust is required to write simulation tests for contracts (this is required when modeling cross-contract calls in a test scenario)_
 
 Vue: _This will be the front end framework we will be using to build our snazzy UI for our web 3 app_
 
