@@ -37,7 +37,7 @@ If you are familiar with the terms "setter" and "getter", or http GET and POST r
 <blockquote class="tip"><info-icon size="1.5x" class="custom-class tip-icon mr-2 pt-1"></info-icon>When in doubt of whether your contract method is a change or view function, check if you paid for the gas when you called it. View functions are "free" (paid for by the RPC server host), while change functions cost you gas. <a target="_blank" href="https://docs.near.org/docs/concepts/gas">Learn more about NEAR gas fees</a>.</blockquote> 
 
 <!-- TODO: ADD IMAGES OF VIEW AND CALL FUNCTION GAS CONSUMPTION FROM EXPLORER -->
-s
+
 ## General Development Setup
 
 Take a moment to install a few global dependencies so you don't have to worry about them later. 
