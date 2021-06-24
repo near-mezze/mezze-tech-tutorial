@@ -67,7 +67,7 @@ export default {
 
   nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
 
     @include respond-above(sm) {

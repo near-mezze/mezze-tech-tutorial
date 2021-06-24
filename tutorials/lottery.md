@@ -390,7 +390,7 @@ Moving on to the `FeeStrategies`, paste the following into `fee-strategies.ts`
 <v-row justify="center" class="mb-4">
 <v-expansion-panels accordion>
 <v-expansion-panel>
-<v-expansion-panel-header><code>src/lottery/assembly/fee-strategies.ts</code></v-expansion-panel-header>
+<v-expansion-panel-header>src/lottery/assembly/fee-strategies.ts</v-expansion-panel-header>
 <v-expansion-panel-content class="language-typescript">
 
 ```typescript{numberLines: true}{noInlineHighlight:true}
@@ -479,7 +479,10 @@ export class FeeStrategy {
 
 Hopefully, that has demystified this contract a bit. There's a lot going on, but the core logic is pretty simple once we break it down.
 
+
+
 ## Calling Functions
+
 
 We are now ready to compile our code, and call our `play()` function from the terminal.
 
@@ -685,7 +688,9 @@ What if we wanted to keep it simple with the fee strategies? Go ahead and run th
 As you can see, `strategy` takes an integer value of 0, 1, 2, or 3. These are mapped to the fee strategy types, `Free`, `Constant`, `Linear`, and `Exponential` respectively.
 
 
+
 ## Testing
+
 
 There is a lot we can do from the terminal. We can play, reset, play again, and again, reset - forever. 
 
@@ -775,7 +780,56 @@ Now you can get really creative with the scenarios around this Smart Contract. W
 Unit Tests are very semantic; almost pseudo-code. If you aren't inspired yet, simply check some of the `assert` methods found in the various functions in the `assembly/` directory. Just write some tests that trigger those. You can also refer to the the `__tests__/README.md` file.  [Learn more about writing Unit Tests in _AssemblyScript_](https://dev.to/jtenner/testing-with-assemblyscript-and-the-usefulness-of-value-3egn).
 
 
+
+## Deployment
+
+
+We can now publish our polished contract to NEAR TestNet so others can call it. In order to do that, though, we will need a TestNet `AccountId` for our contract.
+
+When you're ready to switch over from a dev contract account to a permanent one for your contract, here's how:
+
+
+**Step 1:** Create an account for the contract.
+
+  - Visit <a href="https://wallet.nearprotocol.com" target="_blank">NEAR Wallet</a> and make a new account. You'll be deploying these smart contracts to this new account.
+  Now authorize NEAR CLI for this new account:
+  
+  <span class="code-emphasis inline-block" style="font-size: smaller;">$ near login</span>
+  
+
+<br/>
+
+**Step 2:** Set contract name in code.
+  - Modify the line in your <span class="code-emphasis inline-block">src/config.js</span> that sets the account name of the contract. Set it to the account id you used above. If you don't have a config file set up, take a few minutes to see how the config file is wired up in this <a href="https://github.com/near-examples/guest-book/blob/master/src/config.js" target="_blank">example project</a>.
+
+
+<br/>
+
+**Step 3:** Deploy!
+   - Add this to the "scripts" section of your <span class="code-emphasis inline-block">package.json</span> file:     
+  
+  ```json
+    "deploy": "yarn build:release && near deploy ./build/release/lottery.wasm"
+  ```
+
+  One command: <span class="code-emphasis inline-block">yarn deploy</span>.<br/><br/>
+  As you can see in <span class="code-emphasis inline-block">package.json</span>, this does two things:
+
+  <ol style="margin-left: 1rem;">
+    <li>Builds our WASM.</li>
+    <li>Deploys contract to NEAR TestNet.</li>
+  </ol>
+
+  <br/>
+  
+
+<em>more details at <a href="https://learn.figment.io/network-documentation/near/tutorials" target="_blank">figment.io</a>.</em>
+<br/>
+
+
+
 ## Adding Scripts
+
 
 We can automate our Smart Contract even more with some scripts. So, instead of running each _call_ or _view_ method from the terminal, we can place all of our executables in their own script files with as much commentary as we need. 
 
@@ -843,18 +897,18 @@ Your Terminal B window should start going a little nuts and create an ascii tabl
 Move to the other terminal window you opened, and set the `$CONTRACT` env variable the same way you just did in Terminal B.
 
 <blockquote class="tip mb-4">
-<h3><info-icon size="1. mr-45x" class="custom-class tip-icon"></info-icon></info-icon>
-What is a Terminal??</h3><br/>
+  <h3><info-icon size="1. mr-45x" class="custom-class tip-icon"></info-icon></info-icon>
+  What is a Terminal??</h3><br/>
 
-<hr/>
+  <hr/>
 
-Just in case you're a bit confused about some terminology, "terminal" is synonymous with "bash", "shell", or any program presenting the Command Line Interface (CLI). 
+  Just in case you're a bit confused about some terminology, "terminal" is synonymous with "bash", "shell", or any program presenting the Command Line Interface (CLI). 
 
-Bash is the language used in the CLI.
+  Bash is the language used in the CLI.
 
-Files with the extension <span class="code-emphasis inline-block">.sh</span> tell your Command Line Interface to run them like any other command. 
+  Files with the extension <span class="code-emphasis inline-block">.sh</span> tell your Command Line Interface to run them like any other command. 
 
-<a href="https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_02_01.html" target="_blank">Learn more about creating and running scripts in the Command Line Interface</a>.
+  <a href="https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_02_01.html" target="_blank">Learn more about creating and running scripts in the Command Line Interface</a>.
 
 </blockquote>
 
@@ -869,7 +923,7 @@ Terminal C should become ablaze with information regarding your Smart Contract's
 
 You now have two windows monitoring your Smart Contract's state.
 
-Each terminal window has its own scope regardless if its running in the same directory as other termainals/shells. So, you can open two terminals and set `$PLAYER` to different values in each of those terminals, and each terminal window will only recognize the specific `$PLAYER` value you set within it.
+Each terminal window has its own scope regardless if its running in the same directory as other terminals/shells. So, you can open two terminals and set `$PLAYER` to different values in each of those terminals, and each terminal window will only recognize the specific `$PLAYER` value you set within it.
 
 Let's keep the bash train going and open two more terminals in our `lottery/` directory.
 
@@ -901,7 +955,10 @@ I think we are ready! Run each of the scripts in `scripts/` directory just like 
 
 Look at each terminal window you have opened to see how the information changes in each one. 
 
+
 ## Summary
+
+
 
 If you have made it this far, CONGRATULATIONS!!!
 

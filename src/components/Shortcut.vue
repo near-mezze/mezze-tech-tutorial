@@ -41,6 +41,7 @@ export default {
 <style lang="scss" scoped>
 article {
     flex: 1 0;
+    max-width: 50%;
     border: 1px solid shade($sidebarBright, 10%);
     margin: 0 0 1em;
     background: $sidebarBright;
