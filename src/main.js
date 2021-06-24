@@ -63,10 +63,10 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     content: '#10c186'
   })
 
-  head.meta.push({
-    name: 'google-site-verification',
-    content: process.env.GSV_META
-  })
+  // head.meta.push({
+  //   name: 'google-site-verification',
+  //   content: process.env.GSV_META
+  // })
 
   head.meta.push({
     name: 'apple-mobile-web-app-status-bar-style',
@@ -78,11 +78,6 @@ export default function (Vue, { router, head, isClient, appOptions }) {
     src: "https://cdn.jsdelivr.net/gh/nearprotocol/near-api-js/dist/near-api-js.js"
   })
   
- 
-  // Disqus API 
-  head.script.push({
-    src: "https://near-mezze.disqus.com/embed.js"
-  })
   
   //UI
   appOptions.vuetify = new Vuetify({});
