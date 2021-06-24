@@ -20,7 +20,7 @@ module.exports = {
   siteUrl: 'https://github.com/near-mezze/thanks-tutorial',
   titleTemplate: `${siteName} - %s`,
   chainWebpack(config) {
-    config.mode('development')
+    config.mode('production')
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
     svgRule
