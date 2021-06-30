@@ -8,3 +8,4 @@ dist
 .env.*
 .netlify
 .lock
+package-lock.json
