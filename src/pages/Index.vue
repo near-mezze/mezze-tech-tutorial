@@ -123,7 +123,7 @@ export default {
     position: fixed;
     left: 2rem;
     top: 6rem;
-    z-index: 10;
+    z-index: 100;
   }
 
 </style>
