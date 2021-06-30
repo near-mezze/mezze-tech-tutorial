@@ -27,7 +27,6 @@
       edges {
         node {
           slug
-          section
           headings {
             value
             anchor
