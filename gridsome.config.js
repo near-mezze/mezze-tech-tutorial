@@ -17,7 +17,7 @@ function addStyleResource(rule) {
 const siteName = 'Mezze-Tech'
 module.exports = {
   siteName: siteName,
-  siteUrl: 'https://github.com/near-mezze/thanks-tutorial',
+  siteUrl: 'https://near.mezzetech.com',
   titleTemplate: `${siteName} - %s`,
   chainWebpack(config) {
     config.mode('production')

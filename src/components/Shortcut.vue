@@ -3,7 +3,8 @@
     <h2>
       <g-link :to="link">
         <component :is="icon"></component>
-        {{ text }}
+        <strong class="mb-4">{{title}}</strong>
+        <p>{{text}}</p>
       </g-link>
     </h2>
   </article>
@@ -23,6 +24,10 @@ export default {
   },
   props: {
     link: {
+      type: String,
+      required: true
+    },
+    title: {
       type: String,
       required: true
     },
@@ -75,6 +80,11 @@ a {
     color: $textDark;
   }
 
+}
+
+p {
+  text-align: center;
+  font-size: smaller;
 }
 
 svg {

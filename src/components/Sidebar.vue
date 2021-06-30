@@ -2,14 +2,14 @@
     <aside class="sidebar" :class="{'sidebar--open' : this.$store.state.sidebarOpen}">
       <nav>
         <ul>
-          <li class="section" v-for="{ node } in $static.menu.edges" :key="node.id">
-            <h3 class="section-title">{{node.section}}</h3>
+          <li class="section">
+            <h3 class="section-title">{{$page.tutorial.section}}</h3>
             <ul>
-              <li v-for="item in node.topics" :key="item.title" >
-                <g-link class="topic" :to="'/' + item.slug">{{item.title}}</g-link>
-                <ul v-for="{ node } in subTopics(item.slug)" :key="node.id">
+              <li>
+                <g-link class="topic" :to="'/' + $page.tutorial.slug">{{$page.tutorial.title}}</g-link>
+                <ul v-for="{ node } in subTopics($page.tutorial.slug)" :key="node.id">
                   <li v-for="heading in node.headings" :key="heading.value">
-                    <a class="sub-topic" :href="'/' + item.slug + heading.anchor">{{heading.value}}</a>
+                    <a class="sub-topic" :href="'/' + $page.tutorial.slug + heading.anchor">{{heading.value}}</a>
                   </li>
                 </ul>
               </li>
@@ -22,31 +22,33 @@
 </template>
 
 <static-query>
-query Menu {
-  menu: allMenu(order:ASC) {
-    edges {
-      node {
-        section
-        topics {
-          title
+  query {
+    tutorial: allTutorial {
+      edges {
+        node {
           slug
+          section
+          headings {
+            value
+            anchor
+          }
         }
       }
     }
   }
-  tutorial: allTutorial {
-    edges {
-      node {
-        slug
-        headings {
-          value
-          anchor
-        }
-      }
-    }
-  }
-}
 </static-query>
+
+<page-query>
+  query tutorial ($path: String!) {
+    tutorial: tutorial (path: $path) {
+      title
+      path
+      section
+      slug
+      content
+    }
+  }
+</page-query> 
 
 <script>
 import GitLink from '~/components/GitLink.vue'
@@ -63,6 +65,7 @@ export default {
   },
   methods: {
     subTopics: function(slug) {
+      console.log(this.$page.tutorial)
       return this.$static.tutorial.edges.filter(obj => obj.node.slug === slug)
     },
     stateFromSize: function() {
@@ -75,7 +78,6 @@ export default {
     sidebarScroll: function() {
       let mainNavLinks = document.querySelectorAll('.topic.active + ul .sub-topic')
       let fromTop = window.scrollY
-
       mainNavLinks.forEach(link => {
         let section = document.querySelector(link.hash)
         let allCurrent = document.querySelectorAll('.current'), i
