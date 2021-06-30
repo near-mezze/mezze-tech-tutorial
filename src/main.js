@@ -6,11 +6,11 @@ import '~/assets/scss/globals.scss'
 import Vuetify from 'vuetify'
 import "vuetify/dist/vuetify.min.css"
 import Vuex from 'vuex'
+import VueMarkdown from 'vue-markdown'
 
 import ThanksForm from '~/components/contract-ui/thanks/ThanksForm.vue'
 import LotteryForm from '~/components/contract-ui/lottery/LotteryForm.vue'
 import Highlightable from '~/components/Highlightable.vue'
-
 
 import {GithubIcon, HelpCircleIcon} from 'vue-feather-icons'
 
@@ -32,6 +32,8 @@ export default function (Vue, { router, head, isClient, appOptions }) {
   Vue.component('github-icon', GithubIcon)
   Vue.component('info-icon', HelpCircleIcon)
   
+  // additional markdown helper
+  Vue.component('vue-markdown', VueMarkdown)
   
   // Add contract demo
   Vue.component('thanks-form', ThanksForm)

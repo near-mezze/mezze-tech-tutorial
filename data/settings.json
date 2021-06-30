@@ -1,23 +1,28 @@
 {
-  "sidebar": [
-    {
-      "section": "Introduction",
-      "topics": [
+  "platforms": {
+    "near" : {
+      "tutorials" : [
         {
-          "title": "Getting started",
-          "slug": "getting-started"
-        }
-      ]
-    },
-    {
-      "section": "Smart Contracts",
-      "topics": [
-        {
+          "section": "Contracts",
           "title": "Thanks",
-          "slug": "thanks"
+          "slug": "thanks",
+          "description": "Send Thank You Notes to Other NEAR accounts",
+          "repo": {
+            "name":"thanks",
+            "owner": "near-mezze"
+          }
+        },
+        {
+          "section": "Contracts",
+          "title": "Lottery",
+          "slug" : "lottery",
+          "description": "Play a Low Stakes Lottery Game",
+          "repo": {
+            "name":"lottery",
+            "owner": "near-mezze"
+          }
         }
-
       ]
     }
-  ]
+  }
 }

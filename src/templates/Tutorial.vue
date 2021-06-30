@@ -26,6 +26,7 @@
       path
       slug
       content
+      section
     }
   }
 </page-query> 
