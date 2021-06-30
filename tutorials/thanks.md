@@ -1,6 +1,7 @@
 ---
 title: Thanks
 slug: thanks
+section: Contracts
 ---
 
 <blockquote class="lesson mt-6">

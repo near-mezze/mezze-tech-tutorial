@@ -1,6 +1,7 @@
 ---
 title: Lottery
 slug: lottery
+section: Contracts
 ---
 
 <blockquote class="lesson mt-6">
@@ -18,7 +19,19 @@ slug: lottery
 </blockquote>
 
 
+<h3>PLEASE NOTE!</h3>
+
+
+Any content produced by NEAR, or developer resources that NEAR provides, are for educational and inspiration purposes only. NEAR does not encourage, induce or sanction the deployment of any such applications in violation of applicable laws or regulations.
+
+This tutorial in NO way encourages, promotes, or defends gambling. The demonstrations for the _Lottery_ application in this tutorialal are for educational purposes only. Please check your local government's policies on gambling before proceeding.
+
+If you think you may have a gambling addiction, please seek help at [gamtalk](https://www.gamtalk.org/) or other addiction support providers.
+
+
+
 ## Overview
+
 
 This tutorial assumes you have completed the <a href="/thanks">Thanks Tutorial</a>, so there wont' be as much stuff about local setup, _call_ vs _view_ functions, etc.
 
@@ -31,10 +44,12 @@ If you desire to add a UI layer on top of this Smart Contract, you can see how t
 
 You can find more examples of Smart Contracts with UIs at [examples.near.org](https://examples.near.org/)
 
+
+
 ## Local Setup
 
 
-The repo for this project comes with several branches so be sure you fetch them all. The first branch, `getting-started`, is the bare bones project. It will have all of the files we need to start, but most of them will be empty. The other branches you will find are:
+The repo for this project comes with several branches, so be sure you fetch them all. The first branch, `getting-started`, is the bare bones project. It will have all of the files we need to start, but most of them will be empty. The other branches you will find along with `getting-started` are:
 
 1. `getting-started`
 2. `functions/empty` & `functions/solution`
@@ -45,12 +60,12 @@ The repo for this project comes with several branches so be sure you fetch them 
 
 <h3>Clone The Repo</h3>
 
-Clone the repository below or run this command:
+Clone the repository with this command:
 
 ```bash
   
-  $ git clone git clone git@github.com:near-mezze/lottery.git project-name
-  $ cd project-name
+  $ git clone git clone git@github.com:near-mezze/lottery.git lottery
+  $ cd lottery
   #
   # run scripts in package.json with "yarn <script name>" or "npm run <script name>"
   #
@@ -84,9 +99,12 @@ The main folder we will be using is:
 
 `/lottery/`
 
-This is where we will be writing all our contract code and Unit Tests. If you are in the <nobr><span class="code-emphasis inline-block">getting-started</span></nobr> branch, you should see that a few of the `.ts` files are empty. Don't worry. We will be filling these files back up with code in no time.
+This is where we will write our contract code and Unit Tests. If you are in the <nobr><span class="code-emphasis inline-block">getting-started</span></nobr> branch, you should see that a few of the `.ts` files are empty. Don't worry. We will be filling them with code soon.
+
+
 
 ## Let's Start Coding!
+
 
 Open your `src/lottery/assembly/index.ts` file, and paste the following at the top of the page:
 
@@ -95,7 +113,7 @@ Open your `src/lottery/assembly/index.ts` file, and paste the following at the t
 <v-row justify="center" class="mb-4">
 <v-expansion-panels accordion>
 <v-expansion-panel>
-<v-expansion-panel-header><code>src/lottery/assembly/index.ts</code></v-expansion-panel-header>
+<v-expansion-panel-header>src/lottery/assembly/index.tss</v-expansion-panel-header>
 <v-expansion-panel-content class="language-typescript">
 
 ```typescript{numberLines: true}{noInlineHighlight:true}
