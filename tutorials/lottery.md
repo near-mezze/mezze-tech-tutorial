@@ -559,6 +559,12 @@ Go ahead and run the following to initialize the contract:
   $ <span class="token function">near</span> call $CONTRACT_ACCOUNT init '{\"owner\":\"'$OWNER_ACCOUNT'\"}' --accountId $CONTRACT_ACCOUNT            
 </pre>
 
+Or if you don't have an init function, use "new" to initialize your contract:
+
+<pre class="language-bash">
+  $ <span class="token function">near</span> call $CONTRACT_ACCOUNT new '{}' --accountId $CONTRACT_ACCOUNT            
+</pre>
+
 If you're still seeing errors, try running `yarn clean` then run the following:
 
 <pre class="language-bash">
