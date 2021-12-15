@@ -651,7 +651,12 @@ I love `assert`. It's so intuitive, and simply allows you to place guards with e
 <h3>Initialize your Contract</h3>
 
 
-One last thing to remember, unlike the function pattern ( also known as "Bag of Functions"), the singleton style requires you to initialize the contract, when you _first_ deploy or call it, with a couple of simple flags, `--initFunction new --initArgs '{}'` where `{}` contains the arguments your Class' constructor requires for instantiation, if any. 
+One last thing to remember, unlike the function pattern ( also known as "Bag of Functions"), the singleton style requires you to initialize the contract, when you _first_ deploy or call it. If you have an `init` function then simply call it like you would any other methods. Otherwise use `new` to initialize your contract:
+
+```bash
+  near call $CONTRACT_NAME new '{}' --accountId $YOUR_ACCOUNT_ID --gas=300000000000000
+```
+
 
 Just remember to remove the flags from subsequent deployments / calls or you will get an error complaining that you already initialized it. 
 
